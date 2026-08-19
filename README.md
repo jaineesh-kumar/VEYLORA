@@ -162,8 +162,7 @@ The state diagrams illustrate the lifecycle and various states of different syst
 |-----------|---------|
 | **Prediction** | ![Prediction State](Architecture%20%26%20Workflow/State_Prediction_final.png) |
 | **Encryption** | ![Encryption State](Architecture%20%26%20Workflow/State_Final_Encrypting.png) |
-| **User Authentication** | ![Auth State](Architecture%20%26%20Workflow/State_Final_UserAuthentication.png) |
-| **User Profile** | ![Profile State](Architecture%20%26%20Workflow/State_User_Final_profile.png) |
+
 
 ---
 
