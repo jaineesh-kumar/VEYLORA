@@ -1,0 +1,18 @@
+MERGE INTO algorithm (name, type, pros, cons) KEY(name) VALUES
+    ('AES-128', 'Symmetric', 'Fast, secure, and widely used.', 'Lower key size than AES-256.'),
+    ('AES-192', 'Symmetric', 'More secure than AES-128.', 'Slightly slower than AES-128.'),
+    ('AES-256', 'Symmetric', 'Highly secure, recommended for critical data.', 'Slower than AES-128 and AES-192.'),
+    ('DES', 'Symmetric', 'Simple and efficient.', 'Weak security, vulnerable to brute-force attacks.'),
+    ('3DES', 'Symmetric', 'Stronger than DES.', 'Slower and less efficient than AES.'),
+    ('Blowfish', 'Symmetric', 'Fast and flexible key length.', 'Not as widely adopted as AES.'),
+    ('RC4', 'Symmetric', 'Fast stream cipher.', 'Weak security, vulnerable to attacks.'),
+    ('ChaCha20', 'Symmetric', 'Faster than AES on software.', 'Less widely supported than AES.'),
+    ('RSA', 'Asymmetric', 'Widely used for secure key exchange.', 'Slower encryption compared to symmetric algorithms.'),
+    ('DSA', 'Asymmetric', 'Efficient for digital signatures.', 'Not suitable for encryption.'),
+    ('ECDSA', 'Asymmetric', 'Stronger security with smaller key sizes.', 'More complex implementation.'),
+    ('Diffie-Hellman', 'Asymmetric', 'Used for key exchange.', 'Vulnerable to man-in-the-middle attacks if not properly implemented.'),
+    ('ECDH', 'Asymmetric', 'More secure key exchange than Diffie-Hellman.', 'Complex implementation.'),
+    ('MD5', 'Hash', 'Fast hash function.', 'Not secure, vulnerable to collisions.'),
+    ('SHA-1', 'Hash', 'More secure than MD5.', 'Weaknesses found, not recommended for security-sensitive applications.'),
+    ('SHA-256', 'Hash', 'Secure and widely used.', 'Slower than MD5 and SHA-1.'),
+    ('SHA-3-256', 'Hash', 'Designed to be more secure than SHA-2.', 'Less adoption compared to SHA-256.');
