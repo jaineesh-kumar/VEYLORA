@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sky-top: #EAF2FC;
+  --color-sky-mid: #DCE3FA;
+  --color-haze: #E9DFFB;
+  --color-ink: #211C36;
+  --color-ink-dim: #6C6684;
+  --color-accent-violet: #7C5CFF;
+  --color-accent-blue: #4DA6FF;
+  --color-glass-fill: rgba(255,255,255,0.55);
+  --color-glass-border: rgba(255,255,255,0.7);
+  --color-pill-dark: #241B3D;
+  --color-void: #09090b;
+  --color-dusk: #1a1025;
+  --color-signal-violet: #ff007f;
+  --color-cipher-cyan: #00f0ff;
+  --color-key-amber: #ffea00;
+
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: Inter, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-headline: Inter, sans-serif;
+  --font-accent: Fraunces, serif;
+}
+
+:root {
+  --sky-top: #EAF2FC;
+  --sky-mid: #DCE3FA;
+  --haze: #E9DFFB;
+  --ink: #211C36;
+  --ink-dim: #6C6684;
+  --accent-violet: #7C5CFF;
+  --accent-blue: #4DA6FF;
+  --glass-fill: rgba(255,255,255,0.55);
+  --glass-border: rgba(255,255,255,0.7);
+  --pill-dark: #241B3D;
+}
+
+@layer base {
+  body {
+    @apply text-ink font-body antialiased;
+    background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 45%, var(--haze) 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .glass-surface {
+    background: var(--glass-fill);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(33,28,54,0.10);
+    border-radius: 16px;
+  }
+
+  .glass-pill {
+    background: var(--glass-fill);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(33,28,54,0.10);
+    border-radius: 999px;
+  }
+}
+
+@keyframes drift-a {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(10%, -10%) scale(1.1); }
+  66% { transform: translate(-10%, 10%) scale(0.9); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes drift-b {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-10%, -5%) scale(0.95); }
+  66% { transform: translate(15%, -15%) scale(1.05); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes drift-c {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(15%, 15%) scale(1.05); }
+  66% { transform: translate(-15%, -15%) scale(0.95); }
+  100% { transform: translate(0, 0) scale(1); }
+}
