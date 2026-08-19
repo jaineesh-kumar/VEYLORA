@@ -1,0 +1,36 @@
+# Secrets & environment files
+.env
+.env.*
+secrets.json
+credentials
+
+# Dependencies
+node_modules/
+venv/
+.venv/
+env/
+vendor/
+
+# Build artifacts & caches
+dist/
+build/
+.next/
+__pycache__/
+*.pyc
+
+# Local databases & runtime logs
+*.sqlite
+*.db
+*.log
+
+# OS and IDE metadata
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Project Specific Overrides (Optional)
+target/
+
+# Machine Learning Models
+*.pickle

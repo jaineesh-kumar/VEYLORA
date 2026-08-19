@@ -1,0 +1,208 @@
+Folder PATH listing for volume Windows
+Volume serial number is 0E12-CD69
+C:.
+¦   project_structure.txt
+¦   
++---Backend
+¦   ¦   .gitattributes
+¦   ¦   .gitignore
+¦   ¦   HELP.md
+¦   ¦   lombok.jar
+¦   ¦   mvnw
+¦   ¦   mvnw.cmd
+¦   ¦   pom.xml
+¦   ¦   
+¦   +---.idea
+¦   ¦       .gitignore
+¦   ¦       compiler.xml
+¦   ¦       encodings.xml
+¦   ¦       jarRepositories.xml
+¦   ¦       misc.xml
+¦   ¦       vcs.xml
+¦   ¦       workspace.xml
+¦   ¦       
+¦   +---.mvn
+¦   ¦   +---wrapper
+¦   ¦           maven-wrapper.properties
+¦   ¦           
+¦   +---src
+¦   ¦   +---main
+¦   ¦   ¦   +---java
+¦   ¦   ¦   ¦   +---com
+¦   ¦   ¦   ¦       +---project
+¦   ¦   ¦   ¦           +---backend
+¦   ¦   ¦   ¦               ¦   BackendApplication.java
+¦   ¦   ¦   ¦               ¦   
+¦   ¦   ¦   ¦               +---Configurations
+¦   ¦   ¦   ¦               ¦       AppConfig.java
+¦   ¦   ¦   ¦               ¦       WebSecurityConfig.java
+¦   ¦   ¦   ¦               ¦       
+¦   ¦   ¦   ¦               +---Controllers
+¦   ¦   ¦   ¦               ¦       AlgorithmController.java
+¦   ¦   ¦   ¦               ¦       AuthController.java
+¦   ¦   ¦   ¦               ¦       CryptographicDataController.java
+¦   ¦   ¦   ¦               ¦       EncryptionController.java
+¦   ¦   ¦   ¦               ¦       UserController.java
+¦   ¦   ¦   ¦               ¦       
+¦   ¦   ¦   ¦               +---Entities
+¦   ¦   ¦   ¦               ¦       Algorithm.java
+¦   ¦   ¦   ¦               ¦       AuthResponse.java
+¦   ¦   ¦   ¦               ¦       CryptographicAlgorithm.java
+¦   ¦   ¦   ¦               ¦       CryptographicData.java
+¦   ¦   ¦   ¦               ¦       LoginRequest.java
+¦   ¦   ¦   ¦               ¦       RefreshTokenRequest.java
+¦   ¦   ¦   ¦               ¦       SignupRequest.java
+¦   ¦   ¦   ¦               ¦       User.java
+¦   ¦   ¦   ¦               ¦       
+¦   ¦   ¦   ¦               +---ExceptionHandler
+¦   ¦   ¦   ¦               ¦       GlobalExceptionHandler.java
+¦   ¦   ¦   ¦               ¦       
+¦   ¦   ¦   ¦               +---Exceptions
+¦   ¦   ¦   ¦               ¦       BearerTokenNotFoundException.java
+¦   ¦   ¦   ¦               ¦       InvalidJwtAccessToken.java
+¦   ¦   ¦   ¦               ¦       InvalidJwtRefreshToken.java
+¦   ¦   ¦   ¦               ¦       
+¦   ¦   ¦   ¦               +---Filters
+¦   ¦   ¦   ¦               ¦       JwtAuthFilter.java
+¦   ¦   ¦   ¦               ¦       
+¦   ¦   ¦   ¦               +---Repositories
+¦   ¦   ¦   ¦               ¦       AlgorithmRepository.java
+¦   ¦   ¦   ¦               ¦       CryptographicDataRepository.java
+¦   ¦   ¦   ¦               ¦       UserRepository.java
+¦   ¦   ¦   ¦               ¦       
+¦   ¦   ¦   ¦               +---Services
+¦   ¦   ¦   ¦                       AlgorithmService.java
+¦   ¦   ¦   ¦                       CryptographicDataService.java
+¦   ¦   ¦   ¦                       EncryptionService.java
+¦   ¦   ¦   ¦                       JwtService.java
+¦   ¦   ¦   ¦                       LoginService.java
+¦   ¦   ¦   ¦                       RefreshService.java
+¦   ¦   ¦   ¦                       SignupService.java
+¦   ¦   ¦   ¦                       UserDetailsServiceImpl.java
+¦   ¦   ¦   ¦                       UserService.java
+¦   ¦   ¦   ¦                       
+¦   ¦   ¦   +---resources
+¦   ¦   ¦       ¦   application.properties
+¦   ¦   ¦       ¦   data.sql
+¦   ¦   ¦       ¦   
+¦   ¦   ¦       +---static
+¦   ¦   ¦       +---templates
+¦   ¦   +---test
+¦   ¦       +---java
+¦   ¦           +---com
+¦   ¦               +---project
+¦   ¦                   +---backend
+¦   ¦                           BackendApplicationTests.java
+¦   ¦                           
+¦   +---target
+¦       +---classes
+¦       ¦   ¦   application.properties
+¦       ¦   ¦   data.sql
+¦       ¦   ¦   
+¦       ¦   +---com
+¦       ¦       +---project
+¦       ¦           +---backend
+¦       ¦               ¦   BackendApplication.class
+¦       ¦               ¦   
+¦       ¦               +---Configurations
+¦       ¦               ¦       AppConfig.class
+¦       ¦               ¦       WebSecurityConfig.class
+¦       ¦               ¦       
+¦       ¦               +---Controllers
+¦       ¦               ¦       AlgorithmController.class
+¦       ¦               ¦       AuthController.class
+¦       ¦               ¦       CryptographicDataController.class
+¦       ¦               ¦       EncryptionController.class
+¦       ¦               ¦       UserController.class
+¦       ¦               ¦       
+¦       ¦               +---Entities
+¦       ¦               ¦       Algorithm.class
+¦       ¦               ¦       AuthResponse$AuthResponseBuilder.class
+¦       ¦               ¦       AuthResponse.class
+¦       ¦               ¦       CryptographicAlgorithm.class
+¦       ¦               ¦       CryptographicData$CryptographicDataBuilder.class
+¦       ¦               ¦       CryptographicData.class
+¦       ¦               ¦       LoginRequest$LoginRequestBuilder.class
+¦       ¦               ¦       LoginRequest.class
+¦       ¦               ¦       RefreshTokenRequest$RefreshTokenRequestBuilder.class
+¦       ¦               ¦       RefreshTokenRequest.class
+¦       ¦               ¦       SignupRequest$SignupRequestBuilder.class
+¦       ¦               ¦       SignupRequest.class
+¦       ¦               ¦       User$UserBuilder.class
+¦       ¦               ¦       User.class
+¦       ¦               ¦       
+¦       ¦               +---ExceptionHandler
+¦       ¦               ¦       GlobalExceptionHandler.class
+¦       ¦               ¦       
+¦       ¦               +---Exceptions
+¦       ¦               ¦       BearerTokenNotFoundException.class
+¦       ¦               ¦       InvalidJwtAccessToken.class
+¦       ¦               ¦       InvalidJwtRefreshToken.class
+¦       ¦               ¦       
+¦       ¦               +---Filters
+¦       ¦               ¦       JwtAuthFilter.class
+¦       ¦               ¦       
+¦       ¦               +---Repositories
+¦       ¦               ¦       AlgorithmRepository.class
+¦       ¦               ¦       CryptographicDataRepository.class
+¦       ¦               ¦       UserRepository.class
+¦       ¦               ¦       
+¦       ¦               +---Services
+¦       ¦                       AlgorithmService.class
+¦       ¦                       CryptographicDataService.class
+¦       ¦                       EncryptionService.class
+¦       ¦                       JwtService.class
+¦       ¦                       LoginService.class
+¦       ¦                       RefreshService.class
+¦       ¦                       SignupService.class
+¦       ¦                       UserDetailsServiceImpl.class
+¦       ¦                       UserService.class
+¦       ¦                       
+¦       +---generated-sources
+¦       ¦   +---annotations
+¦       +---generated-test-sources
+¦       ¦   +---test-annotations
+¦       +---test-classes
+¦           +---com
+¦               +---project
+¦                   +---backend
+¦                           BackendApplicationTests.class
+¦                           
++---Frontend
+    ¦   .gitignore
+    ¦   components.json
+    ¦   eslint.config.js
+    ¦   index.html
+    ¦   package-lock.json
+    ¦   package.json
+    ¦   postcss.config.mjs
+    ¦   README.md
+    ¦   tailwind.config.js
+    ¦   tsconfig.app.json
+    ¦   tsconfig.json
+    ¦   tsconfig.node.json
+    ¦   vite.config.ts
+    ¦   
+    +---public
+    ¦       vite.svg
+    ¦       
+    +---src
+        ¦   App.css
+        ¦   App.tsx
+        ¦   index.css
+        ¦   main.tsx
+        ¦   vite-env.d.ts
+        ¦   
+        +---assets
+        ¦       react.svg
+        ¦       
+        +---components
+        ¦   ¦   SignUp.tsx
+        ¦   ¦   
+        ¦   +---ui
+        ¦           input.tsx
+        ¦           label.tsx
+        ¦           
+        +---lib
+                utils.ts
+                
