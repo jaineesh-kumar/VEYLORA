@@ -1,551 +1,185 @@
-# **AI/ML- Based Cryptographic Algorithm Identification**
+# VEYLORA
 
-Welcome to the repository for the **AI/ML-Based Cryptographic Algorithm Identification** project! This project was developed as part of **DU Hacks 4.0 in 2025 held at DDU Nadiad**, with the goal of creating an intelligent system capable of identifying cryptographic algorithms from modern cryptographic datasets. By leveraging AI and ML techniques, the system analyzes data patterns and features to determine the cryptographic algorithm used, automating the process and enhancing the understanding of algorithm weaknesses to improve security.
-
-
-# **Real-World Problem Statement: AI/ML-Based Cryptographic Algorithm Identification**
-
-
-## 🚨 The Challenge
-
-In today’s digital age, cryptographic algorithms are the backbone of secure communication, data protection, and privacy. However, as cyber threats evolve, attackers often exploit weaknesses in cryptographic implementations or use outdated algorithms to breach systems. Identifying the cryptographic algorithm used in a given dataset or communication stream is a critical step in assessing security vulnerabilities, but this process is **highly complex** and **time-consuming** when done manually.
-
-### Why Is This a Real Issue?
-1. **Rising Cyberattacks**: Attackers frequently use weak or deprecated cryptographic algorithms to exploit systems. Identifying these algorithms in real-time is crucial for preventing breaches.
-2. **Lack of Automation**: Security analysts often rely on manual analysis or heuristic methods to identify cryptographic algorithms, which is error-prone and inefficient.
-3. **Complexity of Modern Cryptography**: With the proliferation of cryptographic standards (e.g., AES, RSA, ECC, ChaCha20) and custom implementations, it’s nearly impossible for humans to analyze and identify algorithms at scale.
-4. **Hidden Weaknesses**: Even strong algorithms can have weak implementations or configurations, which are difficult to detect without advanced pattern recognition.
-
-## 🎯 The Goal
-
-This project aims to address these challenges by developing an **AI/ML-based system** that can automatically identify cryptographic algorithms from modern cryptographic datasets. By leveraging machine learning, the system will:
-- Analyze data patterns and features to determine the algorithm used.
-- Automate the identification process, reducing manual effort and human error.
-- Provide insights into potential weaknesses in cryptographic implementations.
-- Enhance the ability of security teams to respond to threats in real-time.
-
-## 💡 Why This Is Hard
-
-1. **Data Complexity**: Cryptographic datasets are highly complex, with patterns that are difficult to discern without advanced ML techniques.
-2. **Algorithm Diversity**: Modern cryptography involves a wide range of algorithms, each with unique characteristics and implementations.
-3. **Real-Time Requirements**: Identifying algorithms in real-world scenarios requires high accuracy and low latency, which is challenging to achieve.
-4. **Adversarial Environments**: Attackers often obfuscate or modify cryptographic implementations to evade detection, making the problem even more complex.
-
-## 🌍 Real-World Impact
-
-This project has the potential to revolutionize cryptographic security by:
-- Enabling faster and more accurate identification of cryptographic algorithms.
-- Helping organizations detect and mitigate vulnerabilities in their systems.
-- Providing a foundation for building smarter, AI-driven security tools.
-- Contributing to the global effort to combat cybercrime and protect sensitive data.
+> Decode cryptographic patterns with a more intuitive intelligence layer.
 
 ---
 
-By tackling this problem, we aim to bridge the gap between cryptography, machine learning, and cybersecurity, creating a tool that is both innovative and impactful in the real world.
+## 📖 Overview
 
+In today's digital landscape, cryptographic algorithms are the backbone of secure communication, data protection, and privacy. However, identifying the specific cryptographic algorithm used in a given dataset or communication stream is highly complex and time-consuming when done manually.
 
+**VEYLORA** is an intelligent platform that combines machine learning with deterministic rule-based analysis to automatically identify cryptographic algorithms from raw encrypted data. It empowers security analysts, researchers, and developers to analyze, protect, and understand cryptographic signals — all through a modern, purpose-built interface.
 
-# 📂 Presentation  
-You can view the project presentation, some key points are discussed in this ppt regarding the project here:  
+---
 
-[View Presentation](https://docs.google.com/presentation/d/1HG2yGzrDRv5D98kzMdwgv0mOmoPEIMLZ/edit?usp=sharing&ouid=113623327821126759756&rtpof=true&sd=true)
+## ✨ Features
 
-## 🚀 Tech Stack  
+- **Hybrid Algorithm Detection** — A 3-layer classification engine combining structural rules with a Random Forest ML model to identify 15+ cryptographic algorithms
+- **Encryption Toolkit** — Generate encrypted outputs using industry-standard algorithms (AES, DES, 3DES, Blowfish, RC4, ChaCha20, RSA, DSA, ECDSA, and more)
+- **Statistical Analysis** — Displays entropy, byte distribution, data length, block alignment, and classification method for every prediction
+- **Algorithm Knowledge Base** — Detailed reference cards for each supported algorithm including key sizes, use cases, strengths, and weaknesses
+- **Analysis History** — Authenticated users can track and revisit past predictions with confidence scores
+- **Security Insights** — Automatically flags insecure patterns like ECB mode usage or low-entropy outputs
+- **JWT Authentication** — Secure signup, login, token refresh, and session management
 
-Our project leverages a modern and scalable technology stack for both frontend and backend development, ensuring high performance, security, and maintainability.  
+---
 
-### **🖥 Frontend**  
-- React with Vite for a fast and efficient development experience  
-- Tailwind CSS and PostCSS for a responsive and modern UI  
-- Aceternity UI and ShadCN for prebuilt UI components  
-- Axios for API communication  
-- Lucid React for enhanced UI elements  
+## 🛠 Tech Stack
 
-### **🧠 Machine Learning**  
-- Python-based Random Forest model for predictions  
-- Required libraries for model training, evaluation, and inference  
-- A dedicated predictor file for handling predictions  
+| Layer | Technologies |
+|-------|-------------|
+| **Frontend** | React, Vite, TypeScript, Tailwind CSS, PostCSS, ShadCN, Aceternity UI, Axios |
+| **Backend** | Java 17+, Spring Boot, Spring Security, JWT, JPA / Hibernate |
+| **Database** | PostgreSQL |
+| **Machine Learning** | Python 3, Scikit-Learn (Random Forest), NumPy, Pandas, SciPy, PyCryptodome |
+| **Integration** | Java ProcessBuilder → Python inference scripts, REST API |
 
-### **🔐 Backend**  
-- Spring Boot for a robust and scalable backend  
-- JWT for secure authentication and authorization  
-- Cryptographic libraries for data protection  
-- Spring Security for enforcing security best practices  
-- Additional dependencies to ensure a production-ready API
+---
 
-# Prerequisites
-Ensure you have the following installed on your system:
-- Java JDK 17+
-- Spring Boot (Integrated in your project)
-- Maven
-- PostgreSQL (or your preferred database)
-- Node.js & npm (for frontend, if applicable)
+## 📸 Screenshots
 
-------------------------------------------------------------
-## Step 1: Clone the Repository
+### Landing Page
+The hero section introduces VEYLORA's purpose with an immersive visual and a clear call-to-action to enter the studio.
+
+![Landing Page — Hero Section](UI_Image/1.png)
+
+![Landing Page — Value Proposition](UI_Image/2.png)
+
+---
+
+### Algorithm Detection
+Users paste raw hexadecimal data and the hybrid ML engine classifies it, returning the detected algorithm, confidence-ranked probability bars, and a list of supported algorithms.
+
+![Detector — Input Interface](UI_Image/3.png)
+
+![Detector — Prediction Results with Probability Rankings](UI_Image/8.png)
+
+![Detector — Statistical Analysis and Algorithm Details](UI_Image/9.png)
+
+---
+
+### Encryption Workspace
+A focused workspace for secure data transformations. Select any of the 15 supported algorithms, input or generate random plaintext, and produce the encrypted output instantly.
+
+![Encrypt — Algorithm Selection](UI_Image/4.png)
+
+![Encrypt — AES-256 Encryption with Output](UI_Image/7.png)
+
+---
+
+### Algorithm Knowledge Base
+A comprehensive reference covering the detection pipeline, feature extraction methodology, and detailed cards for every supported algorithm — including key sizes, security status, use cases, and technical specifications.
+
+![Knowledge Base — Detection Pipeline and Model Architecture](UI_Image/5.png)
+
+![Knowledge Base — Supported Algorithm Cards](UI_Image/6.png)
+
+---
+
+## 🏗 Architecture & Workflow
+
+### Prediction Flow
+
+The prediction pipeline follows a 3-layer hybrid approach. When a user submits encrypted hex data, the Spring Boot backend delegates it to the Python ML engine via ProcessBuilder. The engine extracts 27 statistical features (entropy, byte frequencies, autocorrelation, block repetition, etc.), runs them through deterministic structural rules first, and falls back to the Random Forest classifier for ambiguous cases. Results are merged with weighted scoring and returned as a structured JSON response to the frontend.
+
+![Prediction Activity Diagram](Backend/images/Final_Prediction_Activity.png)
+
+---
+
+### Authentication Flow
+
+User authentication is handled through a JWT-based system integrated with Spring Security. The flow covers signup, login, token refresh, and logout — ensuring that sessions, prediction history, and profile data remain securely isolated per user.
+
+![Authentication Activity Diagram](Backend/images/Final_Authentication_Activity.png)
+
+---
+
+### Encryption Flow
+
+The encryption module processes user requests through the backend's cryptographic service layer. Each algorithm has a dedicated endpoint, and the service generates keys, performs the transformation, and returns the hex-encoded output along with metadata for the frontend to display.
+
+![Encryption Activity Diagram](Backend/images/Final_Encryption_Activity.png)
+
+---
+
+### System Design
+
+![Class Diagram](Backend/images/Final_Class_Diagram.png)
+
+![Use Case Diagram](Backend/images/UseCaseDiagram_final.png)
+
+---
+
+### Sequence Diagrams
+
+| Flow | Diagram |
+|------|---------|
+| Login | ![Login Sequence](Backend/images/Final_login.png) |
+| Signup | ![Signup Sequence](Backend/images/Final_Signup.png) |
+| Token Refresh | ![Refresh Sequence](Backend/images/Final_Refresh.png) |
+
+---
+
+### State Diagrams
+
+| Component | Diagram |
+|-----------|---------|
+| Prediction | ![Prediction State](Backend/images/State_Prediction_final.png) |
+| Encryption | ![Encryption State](Backend/images/State_Final_Encrypting.png) |
+| User Authentication | ![Auth State](Backend/images/State_Final_UserAuthentication.png) |
+| User Profile | ![Profile State](Backend/images/State_User_Final_profile.png) |
+
+---
+
+## 📂 Project Structure
+
 ```
-git clone https://github.com/razasoneji/CryptML.git
-cd CryptML
+VEYLORA/
+├── Backend/                           # Spring Boot application
+│   ├── src/main/java/.../
+│   │   ├── Controllers/               # REST API endpoints
+│   │   ├── Services/                   # Business logic & ML integration
+│   │   ├── Entities/                   # JPA entities & request/response models
+│   │   ├── Repositories/              # Database access layer
+│   │   ├── Filters/                    # JWT authentication filter
+│   │   ├── Configurations/            # Security & app config
+│   │   └── Exceptions/                # Custom exception handling
+│   ├── src/main/resources/
+│   │   ├── scripts/                    # Python ML engine (predict.py, train_model.py)
+│   │   ├── application.properties      # Backend configuration
+│   │   └── data.sql                    # Seed data for algorithms
+│   └── images/                         # Architecture & UML diagrams
+│
+├── Frontend/                           # React + Vite application
+│   ├── src/
+│   │   ├── components/                 # Page components (Dashboard, Detector, Encrypt, etc.)
+│   │   ├── components/ui/              # Reusable UI primitives (cards, inputs, effects)
+│   │   ├── redux/                      # Global state management
+│   │   └── lib/                        # Utility functions
+│   └── tailwind.config.js              # Tailwind CSS configuration
+│
+├── UI_Image/                           # Application screenshots
+├── .gitignore                          # Git ignore rules
+├── .env.example                        # Environment variable template
+└── README.md
 ```
 
-------------------------------------------------------------
-## Step 2: Setup ML Dependencies (Python)
-The Spring Boot backend calls a Python script (`predict.py`) for ML predictions. Ensure you have Python installed and the required packages.
-### Navigate to the scripts directory
-```
-cd Backend/src/main/resources/scripts
-```
-### Install Python requirements
-```
-pip install numpy scipy scikit-learn pandas pycryptodome cryptography
-```
-*(Note: These are required for both prediction and regenerating training data).*
+---
 
-------------------------------------------------------------
-## Step 3: Setup Backend (Spring Boot)
-### Navigate to the backend directory
-```
-cd backend
-```
+## 🤝 Contributing
 
-## Configure Database (PostgreSQL/MySQL)
-### Open application.properties or application.yml in the src/main/resources folder.
-### Set up your database credentials:
-```
-spring.datasource.url=jdbc:postgresql://localhost:5432/cryptml_db
-spring.datasource.username=your_db_user
-spring.datasource.password=your_db_password
-spring.jpa.hibernate.ddl-auto=update
-```
+Contributions are welcome. To get started:
 
-## Build and Run the Backend
-```
-mvn clean install
-mvn spring-boot:run
-```
-------------------------------------------------------------
-## Step 4: Setup Frontend
-### Navigate to the frontend directory
-```
-cd ../frontend
-```
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/your-feature`)
+3. Commit your changes with clear, descriptive messages
+4. Push to the branch (`git push origin feature/your-feature`)
+5. Open a Pull Request
 
-### Install Dependencies
-```
-npm install
-```
+> **Note:** Do not commit `.env` files, `.pickle` model files, or any credentials.
 
-### Run the Frontend
-```
-npm run dev
-```
-------------------------------------------------------------
-## Step 5: Testing the Setup
-### Backend: Open in browser or Postman
-```
-http://localhost:8080/api/health
-```
+---
 
-## Frontend: Open in browser
-```
-http://localhost:3000
-```
-------------------------------------------------------------
+## 📜 License
 
-## Installation and setup complete! 🚀
-
-
-This tech stack enables a seamless integration between frontend, backend, and machine learning components, ensuring a smooth user experience. 🚀  
-```plaintext
-Backend/
-├── pom.xml
-├── mvnw
-├── mvnw.cmd
-├── src/
-│   ├── main/
-│   │   ├── java/com/project/backend/
-│   │   │   ├── BackendApplication.java
-│   │   │   ├── Configurations/
-│   │   │   │   ├── AppConfig.java
-│   │   │   │   ├── WebSecurityConfig.java
-│   │   │   ├── Controllers/
-│   │   │   │   ├── AlgorithmController.java
-│   │   │   │   ├── AuthController.java
-│   │   │   │   ├── CryptographicDataController.java
-│   │   │   │   ├── EncryptionController.java
-│   │   │   │   ├── MLController.java
-│   │   │   │   ├── UserController.java
-│   │   │   ├── Entities/
-│   │   │   │   ├── Algorithm.java
-│   │   │   │   ├── AuthResponse.java
-│   │   │   │   ├── CryptographicAlgorithm.java
-│   │   │   │   ├── CryptographicData.java
-│   │   │   │   ├── LoginRequest.java
-│   │   │   │   ├── RefreshTokenRequest.java
-│   │   │   │   ├── SignupRequest.java
-│   │   │   │   ├── User.java
-│   │   │   ├── ExceptionHandler/
-│   │   │   │   ├── GlobalExceptionHandler.java
-│   │   │   ├── Exceptions/
-│   │   │   │   ├── BearerTokenNotFoundException.java
-│   │   │   │   ├── InvalidJwtAccessToken.java
-│   │   │   │   ├── InvalidJwtRefreshToken.java
-│   │   │   ├── Filters/
-│   │   │   │   ├── JwtAuthFilter.java
-│   │   │   ├── Repositories/
-│   │   │   │   ├── AlgorithmRepository.java
-│   │   │   │   ├── CryptographicDataRepository.java
-│   │   │   │   ├── UserRepository.java
-│   │   │   ├── Services/
-│   │   │   │   ├── AlgorithmService.java
-│   │   │   │   ├── CryptographicDataService.java
-│   │   │   │   ├── EncryptionService.java
-│   │   │   │   ├── JwtService.java
-│   │   │   │   ├── LoginService.java
-│   │   │   │   ├── MLService.java
-│   │   │   │   ├── RefreshService.java
-│   │   │   │   ├── SignupService.java
-│   │   │   │   ├── UserDetailsServiceImpl.java
-│   │   │   │   ├── UserService.java
-│   │   ├── resources/
-│   │   │   ├── application.properties
-│   │   │   ├── data.sql
-│   │   │   ├── scripts/
-│   │   │   │   ├── model.pickle
-│   │   │   │   ├── predict.py
-│   ├── test/
-│   │   ├── java/com/project/backend/
-│   │   │   ├── BackendApplicationTests.java
-_______________________________________________________________________________
-Frontend/
-├── src/
-│   ├── components/        # Reusable UI components
-│   ├── lib/               # Utility functions or external libraries
-│   ├── ui/                # UI pages and layout components
-│   │   ├── Dashboard.tsx              # Dashboard page
-│   │   ├── DocumentationPage.tsx       # Documentation page
-│   │   ├── History.tsx                 # History page
-│   │   ├── HistoryListItem.tsx         # History list item component
-│   │   ├── LandingPage.tsx             # Landing page
-│   │   ├── Layout.tsx                  # Main layout wrapper
-│   │   ├── Login.tsx                   # Login page
-│   │   ├── ProfilePage.tsx             # User profile page
-│   │   ├── SignUp.tsx                  # Sign-up page
-│   ├── App.css            # Global styles for the App component
-│   ├── App.tsx            # Main application component
-│   ├── index.css          # Global styles
-│   ├── main.tsx           # Entry point of the React app
-│   ├── types.ts           # TypeScript type definitions
-│   ├── vite-env.d.ts      # Vite environment types
-```
-# RestEndpoints & their description 
-
-# Cryptographic Data Controller
-
-## Description
-The `CryptographicDataController` provides REST endpoints to manage cryptographic data.  
-It allows retrieving cryptographic data by ID, fetching the last 20 cryptographic data entries,  
-and updating the `correctedData` status of a specific entry.
-
-## REST Endpoints
-
-### 1. Get Last 20 Cryptographic Data
-- **Endpoint:** `/api/cryptographic-data/last20`
-- **Method:** `GET`
-- **Description:** Fetches the last 20 cryptographic data entries for the current user.
-
-### 2. Update Corrected Data
-- **Endpoint:** `/api/cryptographic-data/correctedData/{id}`
-- **Method:** `PUT`
-- **Description:** Updates the `correctedData` status of a cryptographic entry.
-- **Request Parameters:**  
-  - `id` (Path Variable) → ID of the cryptographic data.  
-  - `correctedData` (Query Parameter) → Boolean value to update the corrected data status.
-
-### 3. Get Cryptographic Data by ID
-- **Endpoint:** `/api/cryptographic-data/{id}`
-- **Method:** `GET`
-- **Description:** Retrieves cryptographic data based on the given ID.
-- **Request Parameters:**  
-  - `id` (Path Variable) → ID of the cryptographic data.
-
-
-# Encryption Controller
-
-## Description
-The `EncryptionController` provides REST endpoints for encrypting data using various cryptographic algorithms.  
-It supports symmetric encryption (AES, DES, Triple DES, Blowfish, RC4, ChaCha20),  
-asymmetric encryption (RSA), digital signatures (DSA, ECDSA), key exchanges (Diffie-Hellman, ECDH),  
-and hashing algorithms (MD5, SHA-1, SHA-256, SHA-3-256).
-
-## REST Endpoints
-
-### Symmetric Encryption
-1. **AES Encryption**
-   - **Endpoint:** `/api/encryption/aes`
-   - **Method:** `GET`
-   - **Description:** Encrypts data using AES encryption.
-
-2. **DES Encryption**
-   - **Endpoint:** `/api/encryption/des`
-   - **Method:** `GET`
-   - **Description:** Encrypts data using DES encryption.
-
-3. **Triple DES Encryption**
-   - **Endpoint:** `/api/encryption/3des`
-   - **Method:** `GET`
-   - **Description:** Encrypts data using Triple DES encryption.
-
-4. **Blowfish Encryption**
-   - **Endpoint:** `/api/encryption/blowfish`
-   - **Method:** `GET`
-   - **Description:** Encrypts data using Blowfish encryption.
-
-5. **RC4 Encryption**
-   - **Endpoint:** `/api/encryption/rc4`
-   - **Method:** `GET`
-   - **Description:** Encrypts data using RC4 encryption.
-   - **Query Parameter:**  
-     - `plaintext` (Optional) → The text to encrypt.
-
-6. **ChaCha20 Encryption**
-   - **Endpoint:** `/api/encryption/chacha20`
-   - **Method:** `GET`
-   - **Description:** Encrypts data using ChaCha20 encryption.
-
-### Asymmetric Encryption
-7. **RSA Encryption**
-   - **Endpoint:** `/api/encryption/rsa`
-   - **Method:** `GET`
-   - **Description:** Encrypts data using RSA encryption.
-
-### Digital Signatures
-8. **DSA Signature Generation**
-   - **Endpoint:** `/api/encryption/dsa`
-   - **Method:** `GET`
-   - **Description:** Generates a digital signature using DSA.
-
-9. **ECDSA Signature Generation**
-   - **Endpoint:** `/api/encryption/ecdsa`
-   - **Method:** `GET`
-   - **Description:** Generates a digital signature using ECDSA.
-
-### Key Exchange
-10. **Diffie-Hellman Key Exchange**
-    - **Endpoint:** `/api/encryption/diffe`
-    - **Method:** `GET`
-    - **Description:** Performs a key exchange using Diffie-Hellman.
-
-11. **ECDH Key Exchange**
-    - **Endpoint:** `/api/encryption/ecdh`
-    - **Method:** `GET`
-    - **Description:** Performs a key exchange using ECDH.
-
-### Hashing Algorithms
-12. **MD5 Hash Generation**
-    - **Endpoint:** `/api/encryption/md5`
-    - **Method:** `GET`
-    - **Description:** Generates an MD5 hash.
-
-13. **SHA-1 Hash Generation**
-    - **Endpoint:** `/api/encryption/sha1`
-    - **Method:** `GET`
-    - **Description:** Generates a SHA-1 hash.
-
-14. **SHA-256 Hash Generation**
-    - **Endpoint:** `/api/encryption/sha256`
-    - **Method:** `GET`
-    - **Description:** Generates a SHA-256 hash.
-
-15. **SHA-3-256 Hash Generation**
-    - **Endpoint:** `/api/encryption/sha3-256`
-    - **Method:** `GET`
-    - **Description:** Generates a SHA-3-256 hash.
-
-
-# ML Controller
-
-## Description
-The `MLController` provides REST endpoints for predicting cryptographic algorithms used in encryption.  
-It processes input hexadecimal strings and determines the corresponding algorithm using machine learning techniques.
-
-## REST Endpoints
-
-### Predict Cryptographic Algorithm
-- **Endpoint:** `/api/ml/predict`  
-- **Method:** `POST`  
-- **Description:** Predicts the cryptographic algorithm used for encryption based on the provided hexadecimal string.
-
-
-# Authentication Controller
-
-## Description
-The `AuthController` provides REST endpoints for user authentication, including signup, login, token refresh, and logout.  
-It integrates with authentication services to manage user access securely.
-
-## REST Endpoints
-
-### User Signup
-- **Endpoint:** `/api/auth/signup`  
-- **Method:** `POST`  
-- **Description:** Registers a new user with the provided credentials.
-
-### User Login
-- **Endpoint:** `/api/auth/login`  
-- **Method:** `POST`  
-- **Description:** Authenticates the user and returns an access token.
-
-### Refresh Token
-- **Endpoint:** `/api/auth/refresh`  
-- **Method:** `POST`  
-- **Description:** Refreshes the access token using a valid refresh token.
-
-### User Logout
-- **Endpoint:** `/api/auth/logout`  
-- **Method:** `POST`  
-- **Description:** Logs out the user by invalidating the current session tokens.
-
-
-# Algorithm Controller
-
-## Description
-The `AlgorithmController` provides endpoints to retrieve cryptographic algorithms, including fetching all algorithms in random order, retrieving a specific algorithm by name, and getting random algorithms excluding a specific one.
-
-## REST Endpoints
-
-### Get All Algorithms in Random Order
-- **Endpoint:** `/api/algorithms/random`  
-- **Method:** `GET`  
-- **Description:** Returns a list of all algorithms in a randomized order.
-
-### Get Algorithm by Name
-- **Endpoint:** `/api/algorithms/{algo}`  
-- **Method:** `GET`  
-- **Description:** Fetches details of a specific algorithm by its name.
-
-### Get 4 Random Algorithms Excluding a Specific One
-- **Endpoint:** `/api/algorithms/random/exclude`  
-- **Method:** `GET`  
-- **Description:** Retrieves four random algorithms while excluding a specified algorithm.  
-- **Query Parameter:** `exclude` – The name of the algorithm to exclude from the results.
-
-
-# User Controller
-
-## Description
-The `UserController` provides endpoints for managing user profiles, including updating user details and retrieving authenticated user information.
-
-## REST Endpoints
-
-### Update User Profile
-- **Endpoint:** `/api/users/update`  
-- **Method:** `PUT`  
-- **Description:** Allows authenticated users to update their profile information.  
-- **Request Body:** `UpdateUserRequest` – Contains updated user details.  
-- **Authentication:** Required.
-
-### Get Authenticated User Details
-- **Endpoint:** `/api/users/me`  
-- **Method:** `GET`  
-- **Description:** Retrieves the details of the currently authenticated user based on the provided JWT token.  
-- **Request Header:** `Authorization: Bearer <token>` – JWT token for authentication.  
-- **Response:** Returns the username, first name, and last name of the authenticated user.
-
-
-
-
-# Relevant Diagrams for the project
-
-### Use Case Diagram for the project
-![Use case](https://github.com/razasoneji/CryptML/blob/main/Backend/images/UseCaseDiagram_final.png?raw=true)
-
-### State Diagram for the project
-
-![]()
-![Class Diagram](https://github.com/razasoneji/CryptML/blob/main/Backend/images/Final_Class_Diagram.png?raw=true)
-
-
-### Activity Diagram for the project
-
-### Authentication Activity Diagram
-![actovity Diagram](https://github.com/razasoneji/CryptML/blob/main/Backend/images/Final_Authentication_Activity.png?raw=true)
-
-
-### Encryption Activity Diagram
-![dsfsdf](https://github.com/razasoneji/CryptML/blob/main/Backend/images/Final_Encryption_Activity.png?raw=true)
-
-
-
-### Prediction Activity Diagram 
-![dsfsdf](https://github.com/razasoneji/CryptML/blob/main/Backend/images/Final_Prediction_Activity.png?raw=true)
-
-
-
-
-### Sequence Diagram for the project
-
-
-### Login Sequence Diagram 
-
-![dsfdsfsdf](https://github.com/razasoneji/CryptML/blob/main/Backend/images/Final_login.png?raw=true)
-
-
-### Refresh Sequence Diagram
-![actovsdfity Diagram](https://github.com/razasoneji/CryptML/blob/main/Backend/images/Final_Refresh.png?raw=true)
-
-
-### Signup Sequence Diagram
-![dsfssdfdf](https://github.com/razasoneji/CryptML/blob/main/Backend/images/Final_Signup.png?raw=true)
-
-
-
-
-### State Diagram for the project
-
-
-### Prediction State Diagram
-![dsfsdfssdfdf](https://github.com/razasoneji/CryptML/blob/main/Backend/images/State_Prediction_final.png?raw=true)
-
-### Encrypting State Diagram 
-![dsfdsdsffdsfsdf](https://github.com/razasoneji/CryptML/blob/main/Backend/images/State_Final_Encrypting.png?raw=true)
-
-
-
-### User profile State Diagram
-![dsfsdfssdfsdfsdfdf](https://github.com/razasoneji/CryptML/blob/main/Backend/images/State_User_Final_profile.png?raw=true)
-
-
-### User Authentication State Diagram
-![actovsdfitdsfyasdf Diagram](https://github.com/razasoneji/CryptML/blob/main/Backend/images/State_Final_UserAuthentication.png?raw=true)
-
-
-### Random Forest ML Architecture
-![sdfasdfasdfasdfasd](https://github.com/razasoneji/CryptML/blob/main/Backend/images/Screenshot%202025-02-23%20233110.png?raw=true)
-
-
-#Images of Project
-
-![sdfadsfsdf](https://github.com/razasoneji/CryptML/blob/main/Backend/images/Screenshot%202025-02-23%20234340.png?raw=true)
-
-
-![sdfasdfadsewfrw](https://github.com/razasoneji/CryptML/blob/main/Backend/images/Screenshot%202025-02-23%20234227.png?raw=true)
-
-
-![sdfasdfadsewfrwsd](https://github.com/razasoneji/CryptML/blob/main/Backend/images/Screenshot%202025-02-23%20234347.png?raw=true)
-
-
-![dsfasdfewdfsdv](https://github.com/razasoneji/CryptML/blob/main/Backend/images/Screenshot%202025-02-23%20234359.png?raw=true)
-
-
-![asefsdfsdf](https://github.com/razasoneji/CryptML/blob/main/Backend/images/Screenshot%202025-02-23%20234407.png?raw=true)
-
-
-
-
-
-
-
-
-
-
-
+This project is licensed under the MIT License.
