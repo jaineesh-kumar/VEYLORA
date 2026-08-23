@@ -1,88 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
-@theme {
-  --color-sky-top: #EAF2FC;
-  --color-sky-mid: #DCE3FA;
-  --color-haze: #E9DFFB;
-  --color-ink: #211C36;
-  --color-ink-dim: #6C6684;
-  --color-accent-violet: #7C5CFF;
-  --color-accent-blue: #4DA6FF;
-  --color-glass-fill: rgba(255,255,255,0.55);
-  --color-glass-border: rgba(255,255,255,0.7);
-  --color-pill-dark: #241B3D;
-  --color-void: #09090b;
-  --color-dusk: #1a1025;
-  --color-signal-violet: #ff007f;
-  --color-cipher-cyan: #00f0ff;
-  --color-key-amber: #ffea00;
+:root { font-family: Manrope, sans-serif; color: #f7f4ff; background: #10080f; }
+* { box-sizing: border-box; }
+html { background: #10080f; }
+body { margin: 0; min-width: 320px; min-height: 100vh; background: #10080f; }
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
 
-  --font-display: "Space Grotesk", sans-serif;
-  --font-body: Inter, sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
-  --font-headline: Inter, sans-serif;
-  --font-accent: Fraunces, serif;
+.app-surface { min-height: 100vh; background: radial-gradient(ellipse 90% 55% at 50% -15%, rgba(147, 51, 234, .24), transparent 70%), #10080f; }
+.app-surface::before { content: ''; position: fixed; inset: 0; pointer-events: none; opacity: .38; background-image: linear-gradient(rgba(245, 208, 254, .055) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 208, 254, .055) 1px, transparent 1px); background-size: 40px 40px; mask-image: linear-gradient(to bottom, black, transparent 68%); }
+.app-surface .bg-black { background-color: transparent !important; }
+.app-surface .bg-black\/50 { background-color: rgba(29, 13, 29, .78) !important; }
+.app-surface .bg-gray-900, .app-surface .bg-zinc-800 { background-color: rgba(42, 19, 46, .82) !important; }
+.app-surface .border-gray-800 { border-color: rgba(148, 163, 184, .16) !important; }
+.app-surface .text-purple-400, .app-surface .text-purple-300 { color: #e9a8ff !important; }
+.app-surface .bg-purple-600 { background-color: #7e22ce !important; }
+.app-surface .hover\:bg-purple-700:hover { background-color: #6b21a8 !important; }
+.app-surface .from-purple-600, .app-surface .from-purple-500 { --tw-gradient-from: #a21caf var(--tw-gradient-from-position) !important; }
+.app-surface .to-blue-600, .app-surface .to-blue-500 { --tw-gradient-to: #7e22ce var(--tw-gradient-to-position) !important; }
+.app-surface textarea, .app-surface input { color: #e2e8f0; }
+.app-surface textarea:focus, .app-surface input:focus { outline: 2px solid rgba(45, 212, 191, .65); outline-offset: 2px; }
+.eyebrow { display: inline-flex; align-items: center; gap: .5rem; border: 1px solid rgba(94,234,212,.22); border-radius: 999px; padding: .4rem .75rem; background: rgba(20,184,166,.07); color: #99f6e4; font: 500 .7rem/1 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
+.page-title { margin: 1rem 0; font-size: clamp(2.25rem, 5vw, 4.75rem); font-weight: 800; letter-spacing: -.065em; line-height: 1; color: #f8fafc; }
+.page-copy { color: #94a3b8; line-height: 1.75; }
+.panel { border: 1px solid rgba(148,163,184,.15); border-radius: 1.25rem; background: rgba(14,27,45,.78); box-shadow: 0 18px 45px rgba(0,0,0,.18); }
+.primary-action { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; border-radius: .7rem; border: 1px solid rgba(240, 171, 252, .32); background: #e879f9; color: #26072a; padding: .8rem 1.1rem; font-weight: 800; transition: transform .2s, background .2s; }
+.primary-action:hover { transform: translateY(-2px); background: #f5d0fe; }
+.secondary-action { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; border: 1px solid rgba(148,163,184,.25); border-radius: .7rem; padding: .8rem 1.1rem; color: #e2e8f0; transition: background .2s; }
+.secondary-action:hover { background: rgba(148,163,184,.1); }
+
+/* Editorial, cosmic treatment for Veylora's product story. */
+.veylora-hero { position: relative; overflow: hidden; min-height: calc(100vh - 72px); background: #10080f; }
+.veylora-hero::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 52% 38%, rgba(226, 96, 255, .45) 0%, rgba(111, 41, 161, .22) 21%, transparent 46%), radial-gradient(circle at 54% 55%, rgba(81, 28, 120, .7), transparent 45%), linear-gradient(90deg, transparent 24.9%, rgba(255,255,255,.16) 25%, transparent 25.12%, transparent 74.9%, rgba(255,255,255,.16) 75%, transparent 75.12%); }
+.veylora-orb { position: absolute; top: 9%; left: 50%; width: min(58vw, 720px); aspect-ratio: 1; transform: translateX(-50%); border-radius: 48% 52% 47% 53% / 38% 42% 58% 62%; background: radial-gradient(circle at 46% 34%, #f8e9ff 0 3%, #2a102d 3.5% 15%, #7f35a6 16%, #f3c8ff 28%, #381348 40%, #bd51dd 58%, #110712 74%); box-shadow: 0 0 90px 30px rgba(217, 70, 239, .22), inset 0 0 100px rgba(255, 255, 255, .3); filter: saturate(1.15); }
+.veylora-orb::after { content: ''; position: absolute; inset: 13%; border: 1px solid rgba(255,255,255,.23); border-radius: inherit; background: radial-gradient(circle at 49% 45%, transparent 0 36%, rgba(255,255,255,.17) 37% 38%, transparent 39%); mix-blend-mode: screen; }
+.veylora-kicker { font: 500 .68rem 'DM Mono', monospace; letter-spacing: .19em; text-transform: uppercase; color: #efc8ff; }
+.veylora-title { font-size: clamp(5.1rem, 15vw, 13.5rem); letter-spacing: -.13em; line-height: .72; font-weight: 800; color: #fff; text-shadow: 0 8px 30px rgba(0,0,0,.55); }
+.veylora-outline { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.67); }
+.veylora-column { border-left: 1px solid rgba(255,255,255,.16); padding: 1.5rem; }
+.veylora-ring { display: grid; width: 104px; aspect-ratio: 1; place-items: center; border-radius: 50%; background: radial-gradient(circle, #fff 0 38%, transparent 39%), conic-gradient(from 45deg, rgba(255,255,255,.12), #d66cff, rgba(255,255,255,.1), #c254ee); box-shadow: 0 0 28px rgba(214, 108, 255, .45); color: #171018; font: 800 .73rem/1 Manrope, sans-serif; text-align: center; }
+.veylora-card { border: 1px solid rgba(255,255,255,.18); background: rgba(30, 10, 29, .48); backdrop-filter: blur(12px); }
+.veylora-hero .veylora-orb { animation: veylora-drift 12s ease-in-out infinite; }
+.veylora-hero > section { animation: veylora-rise .9s cubic-bezier(.16, 1, .3, 1) both; }
+.veylora-hero > section:nth-of-type(2) { animation-delay: .16s; }
+.veylora-hero > section:nth-of-type(3) { animation-delay: .28s; }
+.veylora-hero > section:nth-of-type(4) { animation-delay: .4s; }
+.veylora-hero .veylora-ring { animation: veylora-pulse 3.6s ease-in-out infinite; transition: transform .3s ease, box-shadow .3s ease; }
+.veylora-hero .veylora-ring:hover { transform: scale(1.08) rotate(7deg); box-shadow: 0 0 42px rgba(229, 116, 255, .85); }
+.veylora-hero .veylora-card .veylora-spin-target { animation: veylora-spin 18s linear infinite; }
+.veylora-hero .veylora-card .veylora-spin-target > svg:last-of-type { animation: veylora-counterspin 18s linear infinite; }
+.app-surface header { animation: veylora-drop .7s cubic-bezier(.16, 1, .3, 1) both; }
+.app-surface .panel, .app-surface .rounded-xl.border { transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease; }
+.app-surface .panel:hover, .app-surface .rounded-xl.border:hover { transform: translateY(-4px); border-color: rgba(232, 168, 255, .38) !important; box-shadow: 0 22px 50px rgba(0,0,0,.24); }
+.app-surface button, .app-surface a { transition: transform .2s ease, color .2s ease, background-color .2s ease, border-color .2s ease; }
+.app-surface button:active, .app-surface a:active { transform: scale(.97); }
+@keyframes veylora-drift { 0%, 100% { transform: translateX(-50%) translateY(0) rotate(-2deg) scale(1); } 50% { transform: translateX(-50%) translateY(-18px) rotate(3deg) scale(1.035); } }
+@keyframes veylora-rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes veylora-drop { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes veylora-radar { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes veylora-pulse { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.16); } }
+@keyframes veylora-spin { to { transform: rotate(360deg); } }
+@keyframes veylora-counterspin { to { transform: rotate(-360deg); } }
+@keyframes veylora-section-reveal { from { opacity: 0; transform: translateY(42px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes veylora-card-reveal { from { opacity: .22; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
+@supports (animation-timeline: view()) {
+  .app-surface main .container { animation: veylora-section-reveal linear both; animation-timeline: view(); animation-range: entry 4% cover 30%; }
+  .app-surface main .rounded-xl.border:not(.veylora-card) { animation: veylora-card-reveal linear both; animation-timeline: view(); animation-range: entry 8% cover 25%; }
+  .veylora-hero > section:not(:first-of-type) { animation-timeline: view(); animation-range: entry 8% cover 30%; }
 }
-
-:root {
-  --sky-top: #EAF2FC;
-  --sky-mid: #DCE3FA;
-  --haze: #E9DFFB;
-  --ink: #211C36;
-  --ink-dim: #6C6684;
-  --accent-violet: #7C5CFF;
-  --accent-blue: #4DA6FF;
-  --glass-fill: rgba(255,255,255,0.55);
-  --glass-border: rgba(255,255,255,0.7);
-  --pill-dark: #241B3D;
-}
-
-@layer base {
-  body {
-    @apply text-ink font-body antialiased;
-    background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 45%, var(--haze) 100%);
-    background-attachment: fixed;
-    min-height: 100vh;
-  }
-}
-
-@layer components {
-  .glass-surface {
-    background: var(--glass-fill);
-    backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 8px 32px rgba(33,28,54,0.10);
-    border-radius: 16px;
-  }
-
-  .glass-pill {
-    background: var(--glass-fill);
-    backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 8px 32px rgba(33,28,54,0.10);
-    border-radius: 999px;
-  }
-}
-
-@keyframes drift-a {
-  0% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(10%, -10%) scale(1.1); }
-  66% { transform: translate(-10%, 10%) scale(0.9); }
-  100% { transform: translate(0, 0) scale(1); }
-}
-
-@keyframes drift-b {
-  0% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(-10%, -5%) scale(0.95); }
-  66% { transform: translate(15%, -15%) scale(1.05); }
-  100% { transform: translate(0, 0) scale(1); }
-}
-
-@keyframes drift-c {
-  0% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(15%, 15%) scale(1.05); }
-  66% { transform: translate(-15%, -15%) scale(0.95); }
-  100% { transform: translate(0, 0) scale(1); }
-}
+.veylora-page-kicker { margin-bottom: .7rem; color: #e9a8ff; font: 500 .7rem/1 'DM Mono', monospace; letter-spacing: .16em; text-transform: uppercase; }
+.veylora-page-title { color: #fff !important; font-size: clamp(2.6rem, 5vw, 4.5rem) !important; letter-spacing: -.065em; line-height: .96; text-shadow: 0 10px 28px rgba(0,0,0,.35); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+@media (max-width: 767px) { .veylora-hero::before { background: radial-gradient(circle at 50% 33%, rgba(226, 96, 255, .38), transparent 38%), linear-gradient(90deg, transparent 12%, rgba(255,255,255,.12) 12.2%, transparent 12.4%, transparent 87.6%, rgba(255,255,255,.12) 87.8%, transparent 88%); } .veylora-orb { width: 100vw; top: 17%; } .veylora-title { font-size: clamp(4.3rem, 22vw, 8rem); } }

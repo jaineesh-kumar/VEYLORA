@@ -3,8 +3,7 @@ import axios from 'axios';
 import { HistoryListItem } from './HistoryListItem';
 import { ClipboardList } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import {AlgorithmIdentificationHistory} from '@/types';
-import { motion } from 'framer-motion';
+import {AlgorithmIdentificationHistory} from '@/types'
 
 // Define the type for history items
 
@@ -122,31 +121,31 @@ export default function HistoryPage() {
   };
 
   const EmptyState = () => (
-    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-16 bg-void/60 backdrop-blur-xl rounded-xl border border-signal-violet/20 shadow-[0_0_40px_rgba(108,92,231,0.1)]">
-      <ClipboardList className="mx-auto h-12 w-12 text-signal-violet/50 mb-4" />
-      <h3 className="text-xl font-medium text-signal-violet mb-2 font-display">
+    <div className="text-center py-12 bg-gray-900 rounded-xl border border-gray-800">
+      <ClipboardList className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+      <h3 className="text-lg font-medium text-gray-200 mb-2">
         No Algorithm History Yet
       </h3>
-      <p className="text-ink-dim max-w-sm mx-auto mb-8 font-body">
+      <p className="text-gray-400 max-w-sm mx-auto mb-6">
         Your algorithm identification history will appear here once you start using the system.
       </p>
       <button
         onClick={() => navigate('/')}
-        className="inline-flex items-center px-8 py-3 rounded-full font-bold text-void bg-key-amber hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(245,166,35,0.4)] transition-all"
+        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-black bg-purple-400 hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
       >
         Start Identifying Algorithms
       </button>
-    </motion.div>
+    </div>
   );
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-void text-ink py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-black text-white py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
-          <div className="h-8 w-64 bg-dusk/50 rounded animate-pulse mb-8"></div>
+          <div className="h-8 w-64 bg-gray-800 rounded animate-pulse mb-8"></div>
           <div className="space-y-4">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="h-24 bg-dusk/50 rounded-xl animate-pulse"></div>
+              <div key={i} className="h-24 bg-gray-800 rounded-xl animate-pulse"></div>
             ))}
           </div>
         </div>
@@ -157,12 +156,11 @@ export default function HistoryPage() {
   const historyItems = Array.isArray(history) ? history : [];
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen bg-void text-ink py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_0%,var(--signal-violet)_0%,transparent_30%)] opacity-20 pointer-events-none blur-[120px]" />
-      <div className="max-w-3xl mx-auto relative z-10">
-        <h2 className="font-bold text-4xl mb-12 font-display bg-gradient-to-r from-signal-violet to-cipher-cyan bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(108,92,231,0.3)] text-center">
-          Algorithm Identification History
-        </h2>
+    <div className="min-h-screen bg-black text-white py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto">
+        <p className="veylora-page-kicker">Veylora / Archive</p>
+        <h2 className="veylora-page-title font-bold mb-3">Your analysis trail.</h2>
+        <p className="mb-8 text-sm text-gray-400">Every detection you've saved, ready to revisit.</p>
         
         {error && (
           <div className="mb-6 p-4 bg-red-900/50 border border-red-500 rounded-lg text-red-200">
@@ -170,29 +168,20 @@ export default function HistoryPage() {
           </div>
         )}
         
-        <motion.div 
-          initial="hidden" 
-          animate="visible" 
-          variants={{
-            hidden: { opacity: 0 },
-            visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
-          }} 
-          className="space-y-4"
-        >
+        <div className="space-y-4">
           {historyItems.length > 0 ? (
             historyItems.map((item) => (
-              <motion.div key={item.id} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
-                <HistoryListItem
-                  item={item}
-                  onStatusChange={handleStatusChange}
-                />
-              </motion.div>
+              <HistoryListItem
+                key={item.id}
+                item={item}
+                onStatusChange={handleStatusChange}
+              />
             ))
           ) : (
             <EmptyState />
           )}
-        </motion.div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

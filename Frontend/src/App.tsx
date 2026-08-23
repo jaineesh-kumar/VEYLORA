@@ -10,13 +10,14 @@ import EncryptionPage from './components/EncryptionPage';
 import { Toaster } from 'react-hot-toast';
 import PrivateRoute from './components/PrivateRoute';
 import Layout from './components/Layout';
-
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
 
  
   return (
     <Router>
+      <ScrollToTop />
       <Toaster position="top-right" reverseOrder={false} />
 
       <Routes>

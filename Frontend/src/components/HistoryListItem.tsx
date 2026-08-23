@@ -52,28 +52,27 @@ export const HistoryListItem: React.FC<HistoryListItemProps> = ({ item, onStatus
   const DetailPopup = () => (
     <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
       <div
-        className="fixed inset-0 bg-void/20 backdrop-blur-sm"
+        className="fixed inset-0 bg-black/20 backdrop-blur-sm"
         onClick={() => setShowDetails(false)}
       ></div>
-      <div className="relative bg-void/90 backdrop-blur-2xl rounded-2xl shadow-[0_0_50px_rgba(108,92,231,0.2)] w-full max-w-md border border-signal-violet/30 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-signal-violet/5 to-transparent pointer-events-none"></div>
-        <div className="flex justify-between items-center p-6 border-b border-ink-dim/20">
-          <h2 className="text-xl font-semibold text-ink font-display">Algorithm Details</h2>
+      <div className="relative bg-gray-900 rounded-2xl shadow-xl w-full max-w-md border border-gray-800">
+        <div className="flex justify-between items-center p-6 border-b border-gray-800">
+          <h2 className="text-xl font-semibold text-white">Algorithm Details</h2>
           <button
             onClick={() => setShowDetails(false)}
-            className="text-ink-dim hover:text-gray-200 transition-colors rounded-full hover:bg-dusk/50 p-1"
+            className="text-gray-400 hover:text-gray-200 transition-colors rounded-full hover:bg-gray-800 p-1"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
         <div className="p-6 space-y-6">
           <div>
-            <label className="text-sm font-medium text-ink-dim">Data</label>
-            <p className="mt-2 text-ink break-words">{item.data}</p>
+            <label className="text-sm font-medium text-gray-400">Data</label>
+            <p className="mt-2 text-white break-words">{item.data}</p>
           </div>
           <div>
-            <label className="text-sm font-medium text-ink-dim">Created At</label>
-            <p className="mt-2 text-ink">
+            <label className="text-sm font-medium text-gray-400">Created At</label>
+            <p className="mt-2 text-white">
               {item.createdAt
                 ? new Date(item.createdAt).toLocaleString('en-US', {
                     dateStyle: 'medium',
@@ -83,7 +82,7 @@ export const HistoryListItem: React.FC<HistoryListItemProps> = ({ item, onStatus
             </p>
           </div>
           <div>
-            <label className="text-sm font-medium text-ink-dim">Prediction Status</label>
+            <label className="text-sm font-medium text-gray-400">Prediction Status</label>
             <div className="mt-2 flex items-center">
               <button
                 onClick={handleStatusToggle}
@@ -102,8 +101,8 @@ export const HistoryListItem: React.FC<HistoryListItemProps> = ({ item, onStatus
             </div>
           </div>
           <div>
-            <label className="text-sm font-medium text-ink-dim">Predicted Algorithm</label>
-            <p className="mt-2 text-ink">{item.predictedAlgorithm ?? 'Unknown'}</p>
+            <label className="text-sm font-medium text-gray-400">Predicted Algorithm</label>
+            <p className="mt-2 text-white">{item.predictedAlgorithm ?? 'Unknown'}</p>
           </div>
         </div>
       </div>
@@ -114,11 +113,11 @@ export const HistoryListItem: React.FC<HistoryListItemProps> = ({ item, onStatus
     <>
       <div
         onClick={() => setShowDetails(true)}
-        className="bg-void/80 backdrop-blur-xl rounded-xl p-6 shadow-[0_0_15px_rgba(108,92,231,0.05)] hover:shadow-[0_0_30px_rgba(108,92,231,0.15)] cursor-pointer hover:bg-void transition-all duration-300 border border-ink-dim/10 hover:border-signal-violet/40 hover:scale-[1.01] group"
+        className="bg-gray-900 rounded-xl p-6 shadow-sm hover:shadow-md cursor-pointer hover:bg-gray-800 transition-all duration-200 border border-gray-800"
       >
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-2 flex-1 min-w-0">
-            <p className="text-base font-medium text-ink truncate group-hover:text-cipher-cyan transition-colors">
+            <p className="text-base font-medium text-white truncate">
               {item.data ?? 'No data available'}
             </p>
             {item.predictedAlgorithm && (
@@ -134,12 +133,12 @@ export const HistoryListItem: React.FC<HistoryListItemProps> = ({ item, onStatus
                     <XCircle className="w-4 h-4 text-red-500" />
                   )}
                 </button>
-                <span className="text-sm text-ink-dim">{item.predictedAlgorithm ?? 'Unknown'}</span>
+                <span className="text-sm text-gray-400">{item.predictedAlgorithm ?? 'Unknown'}</span>
               </div>
             )}
           </div>
           {item.createdAt && (
-            <div className="flex items-center text-sm text-ink-dim">
+            <div className="flex items-center text-sm text-gray-400">
               <Clock className="w-4 h-4 mr-1 flex-shrink-0" />
               {formatTimeAgo(item.createdAt)}
             </div>

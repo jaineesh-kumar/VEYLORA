@@ -4,11 +4,12 @@ import {
   Lock, Key, Hash, Clipboard,
   RefreshCw, Settings, Shield, Zap, Rocket
 } from 'lucide-react';
+import { BackgroundBeams } from './ui/background-beams';
 import { motion } from 'framer-motion';
 import { toast } from 'react-hot-toast';
 
 // Map algorithm names to backend endpoint paths
-const endpointMap = {
+const endpointMap: Record<string, string> = {
   AES: 'aes',
   DES: 'des',
   '3DES': '3des',
@@ -45,13 +46,14 @@ const algorithms = [
 ];
 
 const API_BASE = import.meta?.env?.REACT_APP_API_BASE || 'http://localhost:8080';
+type EncryptionHistoryItem = { algorithm: string; input: string; result: string };
 
 const EncryptionPage = () => {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(algorithms[0]);
   const [inputText, setInputText] = useState('');
   const [encryptedText, setEncryptedText] = useState('');
   const [loading, setLoading] = useState(false);
-  const [history, setHistory] = useState<{ algorithm: string; input: string; result: any }[]>([]);
+  const [history, setHistory] = useState<EncryptionHistoryItem[]>([]);
 
   const handleGenerate = async () => {
     setLoading(true);
@@ -73,13 +75,13 @@ const EncryptionPage = () => {
   const handleEncrypt = async () => {
     setLoading(true);
     try {
-      const endpoint = endpointMap[selectedAlgorithm.name as keyof typeof endpointMap];
+      const endpoint = endpointMap[selectedAlgorithm.name];
       if (!endpoint) {
         throw new Error('Unsupported algorithm');
       }
 
       const resp = await axios.get(`${API_BASE}/api/encryption/${endpoint}`);
-      const result = typeof resp.data === 'string' ? resp.data : JSON.stringify(resp.data, null, 2);
+      const result = typeof resp.data === 'string' ? resp.data : JSON.stringify(resp.data);
   
       setEncryptedText(result);
       setHistory(prev => [
@@ -102,25 +104,27 @@ const EncryptionPage = () => {
   };
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative min-h-screen text-ink overflow-hidden pt-24 pb-12">
+    <div className="relative min-h-screen bg-black text-white">
+      <BackgroundBeams className="absolute top-0 left-0 w-full h-full pointer-events-none z-0" />
       <div className="container mx-auto px-4 py-12 relative z-10">
         {/* Header */}
-        <motion.div initial={{ y: -20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="text-center mb-16">
-          <h1 className="text-5xl font-semibold mb-4 font-headline text-ink">
-            Cryptographic Operations
+        <div className="text-center mb-16">
+          <p className="veylora-page-kicker">Veylora / Encrypt</p>
+          <h1 className="veylora-page-title font-bold mb-4">
+            Transform with intent.
           </h1>
-          <p className="text-ink-dim max-w-2xl mx-auto font-body text-lg">
-            Secure data transformations powered by industry-standard algorithms.
-            {selectedAlgorithm && <span className="text-accent-violet font-medium block mt-2">Selected: {selectedAlgorithm.name}-{selectedAlgorithm.keySize}</span>}
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            A focused workspace for secure data transformations using industry-standard algorithms.
+            {selectedAlgorithm && ` Selected: ${selectedAlgorithm.name}-${selectedAlgorithm.keySize}`}
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Algorithm Selection */}
           <div className="lg:col-span-1 space-y-6">
-            <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="glass-surface p-6">
-              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 font-headline">
-                <Settings className="w-6 h-6 text-accent-violet" />
+            <div className="rounded-xl border border-gray-800 bg-black/50 backdrop-blur-md p-6 transform-gpu [will-change:transform]">
+              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                <Settings className="w-6 h-6 text-purple-400" />
                 Algorithm Configuration
               </h2>
               <div className="grid grid-cols-2 gap-3">
@@ -130,33 +134,33 @@ const EncryptionPage = () => {
                     onClick={() => setSelectedAlgorithm(algo)}
                     className={`p-4 rounded-lg border transition-all ${
                       selectedAlgorithm.name === algo.name
-                        ? 'border-accent-violet bg-accent-violet/10'
-                        : 'border-ink-dim/10 hover:border-accent-violet/30 hover:bg-white/30'
+                        ? 'border-purple-500 bg-purple-500/10'
+                        : 'border-gray-800 hover:border-purple-400'
                     }`}
                     whileHover={{ scale: 1.02 }}
                   >
                     <div className="flex items-center gap-2">
-                      <algo.icon className={`w-5 h-5 ${selectedAlgorithm.name === algo.name ? 'text-accent-blue' : 'text-accent-violet'}`} />
-                      <span className="text-sm font-mono">{algo.name}</span>
+                      <algo.icon className="w-5 h-5 text-purple-400" />
+                      <span className="text-sm">{algo.name}</span>
                     </div>
                   </motion.button>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
 
           {/* Encryption Workspace */}
-          <motion.div initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.2 }} className="lg:col-span-2 space-y-6">
-            <div className="glass-surface p-6">
+          <div className="lg:col-span-2 space-y-6">
+            <div className="rounded-xl border border-gray-800 bg-black/50 backdrop-blur-md p-6 transform-gpu [will-change:transform]">
               <div className="grid md:grid-cols-2 gap-6">
                 {/* Input */}
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold font-headline">Input Text</h3>
+                    <h3 className="text-lg font-semibold">Input Text</h3>
                     <button
                       onClick={handleGenerate}
                       disabled={loading}
-                      className="flex items-center gap-2 text-sm bg-accent-violet/10 hover:bg-accent-violet/20 border border-accent-violet/20 text-accent-violet px-3 py-1.5 rounded-lg transition-colors font-medium"
+                      className="flex items-center gap-2 text-sm bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition-colors"
                     >
                       <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
                       Generate Random
@@ -166,14 +170,13 @@ const EncryptionPage = () => {
                     <textarea
                       value={inputText}
                       onChange={e => setInputText(e.target.value)}
-                      className="w-full h-32 bg-white/30 rounded-lg p-4 border border-ink-dim/20 focus:border-accent-blue focus:ring-1 focus:ring-accent-blue resize-none font-mono text-sm text-ink transition-all placeholder:text-ink-dim/60 outline-none"
+                      className="w-full h-32 bg-gray-900 rounded-lg p-4 border border-gray-800 focus:ring-purple-500 resize-none"
                       placeholder="Enter text or generate random"
-                      spellCheck="false"
                     />
                     {inputText && (
                       <button
                         onClick={() => copyToClipboard({ text: inputText, message: 'Input copied!' })}
-                        className="absolute top-2 right-2 p-2 hover:bg-dusk/50 rounded-lg"
+                        className="absolute top-2 right-2 p-2 hover:bg-gray-800 rounded-lg"
                       >
                         <Clipboard className="w-5 h-5" />
                       </button>
@@ -183,19 +186,18 @@ const EncryptionPage = () => {
 
                 {/* Output */}
                 <div className="space-y-4">
-                  <h3 className="text-lg font-semibold mt-2 font-headline">Encrypted Output</h3>
+                  <h3 className="text-lg font-semibold mt-2">Encrypted Output</h3>
                   <div className="relative">
                     <textarea
                       value={encryptedText}
                       readOnly
-                      className="w-full h-32 bg-white/30 rounded-lg p-4 border border-ink-dim/20 resize-none font-mono text-sm text-ink outline-none"
+                      className="w-full h-32 bg-gray-900 rounded-lg p-4 border border-gray-800 resize-none"
                       placeholder="Encrypted result will appear here"
-                      spellCheck="false"
                     />
                     {encryptedText && (
                       <button
                         onClick={() => copyToClipboard({ text: encryptedText, message: 'Encrypted text copied!' })}
-                        className="absolute top-2 right-2 p-2 hover:bg-dusk/50 rounded-lg"
+                        className="absolute top-2 right-2 p-2 hover:bg-gray-800 rounded-lg"
                       >
                         <Clipboard className="w-5 h-5" />
                       </button>
@@ -208,7 +210,7 @@ const EncryptionPage = () => {
               <button
                 onClick={handleEncrypt}
                 disabled={loading}
-                className="w-full mt-6 bg-pill-dark text-white hover:opacity-90 px-6 py-4 rounded-full font-medium transition-all flex items-center justify-center gap-2 hover:-translate-y-[1px]"
+                className="w-full mt-6 border-2 border-purple-500 hover:bg-purple-600/20 text-white px-6 py-4 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] [will-change:transform,box-shadow]"
               >
                 <Shield className="w-5 h-5" />
                 {loading ? 'Encrypting...' : 'Perform Encryption'}
@@ -216,30 +218,30 @@ const EncryptionPage = () => {
             </div>
 
             {/* History */}
-            <div className="glass-surface p-6">
-              <h3 className="text-lg font-semibold mb-4 font-headline">Recent Operations</h3>
+            <div className="rounded-xl border border-gray-800 bg-black/50 backdrop-blur-md p-6 [content-visibility:auto] [contain-intrinsic-size:500px] transform-gpu [will-change:transform]">
+              <h3 className="text-lg font-semibold mb-4">Recent Operations</h3>
               <div className="space-y-3">
                 {history.length > 0 ? history.map((item, idx) => (
-                  <div key={idx} className="flex items-center justify-between p-3 bg-white/30 rounded-lg border border-ink-dim/10 hover:border-accent-violet/30 transition-all">
+                  <div key={idx} className="flex items-center justify-between p-3 bg-gray-900 rounded-lg border border-gray-800 [contain:layout_paint_style]">
                     <div className="flex items-center gap-3">
-                      <Lock className="w-5 h-5 text-accent-violet" />
-                      <span className="font-mono text-sm text-accent-blue">{item.algorithm}</span>
+                      <Lock className="w-5 h-5 text-purple-400" />
+                      <span className="font-mono text-sm">{item.algorithm}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-ink-dim text-sm">{item.input.slice(0, 15)}...</span>
-                      <span className="text-accent-violet">→</span>
-                      <span className="text-ink-dim text-sm">{item.result.slice(0, 15)}...</span>
+                      <span className="text-gray-400 text-sm">{item.input.slice(0, 15)}...</span>
+                      <span className="text-purple-400">→</span>
+                      <span className="text-gray-400 text-sm">{item.result.slice(0, 15)}...</span>
                     </div>
                   </div>
                 )) : (
-                  <p className="text-center text-ink-dim/70 py-4">No recent operations</p>
+                  <p className="text-center text-gray-500 py-4">No recent operations</p>
                 )}
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

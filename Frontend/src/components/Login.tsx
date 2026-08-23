@@ -10,9 +10,14 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../redux/authSlice.ts";
-import { motion } from "framer-motion";
 
 
+
+const BackgroundGrid = () => (
+  <div className="absolute inset-0 -z-10 h-full w-full bg-black bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px]">
+    <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-purple-500 opacity-20 blur-[100px]"></div>
+  </div>
+);
 
 export default function SignupFormDemo() {
   const [formData, setFormData] = useState({
@@ -57,61 +62,57 @@ export default function SignupFormDemo() {
   
 
   return (
-    <div className="relative min-h-screen text-ink">
-      <div className="container mx-auto flex min-h-screen items-center justify-center px-4 pt-24 pb-12">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }} 
-          animate={{ opacity: 1, y: 0 }} 
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="w-full max-w-md glass-surface p-8 relative z-10"
-        >
-          <h2 className="mb-6 text-2xl font-semibold font-headline text-ink">Welcome to <span className="font-accent italic text-accent-violet font-normal">CryptML</span></h2>
+    <div className="app-surface relative min-h-screen text-white">
+      <BackgroundGrid />
+      {/* <BackgroundBeams className="absolute top-0 left-0 w-full h-full pointer-events-none z-0" /> */}
+
+      <div className="container mx-auto flex min-h-screen items-center justify-center px-4 py-10">
+        <div className="panel w-full max-w-md p-8 relative z-10 sm:p-10">
+          <div className="eyebrow mb-5">Veylora / Secure workspace</div>
+          <h2 className="text-3xl font-extrabold tracking-tight text-white">Welcome back.</h2>
+          <p className="mt-2 mb-8 text-sm text-slate-400">Sign in to access your analysis history and profile.</p>
 
           <form className="space-y-6" onSubmit={handleSubmit}>
             <LabelInputContainer>
-              <Label htmlFor="username" className="text-ink-dim">Username</Label>
+              <Label htmlFor="username" className="text-gray-400">Username</Label>
               <Input
                 id="username"
                 placeholder="YourUsername123"
                 type="text"
                 value={formData.username}
                 onChange={handleChange}
-                className="bg-transparent border-none text-ink shadow-input"
+                className="bg-slate-900/80 border border-slate-700/60 text-white shadow-none"
               />
             </LabelInputContainer>
 
             <LabelInputContainer>
-              <Label htmlFor="password" className="text-ink-dim">Password</Label>
+              <Label htmlFor="password" className="text-gray-400">Password</Label>
               <Input
                 id="password"
                 placeholder="••••••••"
                 type="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="bg-transparent border-none text-ink shadow-input"
+                className="bg-slate-900/80 border border-slate-700/60 text-white shadow-none"
               />
             </LabelInputContainer>
 
             {error && <p className="text-red-500 text-sm">{error}</p>}
 
             <button
-              className="group relative w-full overflow-hidden rounded-full bg-pill-dark transition-all duration-300 ease-out hover:-translate-y-[1px]"
+              className="primary-action w-full"
               type="submit"
             >
-              <div className="rounded-full px-8 py-3 transition-all duration-300">
-                <span className="relative flex items-center justify-center font-medium text-white">
-                  Login
-                </span>
-              </div>
+              Sign in
             </button>
-            <p className="text-ink-dim text-sm text-center mt-6">
+            <p className="text-gray-400 text-sm text-center mt-4">
             Don't have an account?{" "}
-            <Link to="/signup" className="text-accent-violet hover:text-accent-blue transition-colors font-medium">
+            <Link to="/signup" className="text-fuchsia-300 hover:text-fuchsia-200">
               Sign up here
             </Link>
           </p>
           </form>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

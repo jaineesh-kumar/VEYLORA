@@ -5,7 +5,6 @@ import {
   Link2, LockKeyhole, Repeat,
 } from 'lucide-react';
 import { BackgroundBeams } from './ui/background-beams';
-import { motion } from 'framer-motion';
 
 const algorithmData = [
   {
@@ -161,13 +160,13 @@ const algorithmData = [
 ];
 
 const AlgorithmCard = ({ algorithm }: { algorithm: typeof algorithmData[0] }) => (
-  <motion.div whileHover={{ scale: 1.02 }} className="rounded-xl border border-ink-dim/10 bg-void/60 backdrop-blur-xl p-6 hover:border-signal-violet/40 hover:shadow-[0_0_30px_rgba(108,92,231,0.15)] transition-all h-full group">
+  <div className="rounded-xl border border-gray-800 bg-black/50 backdrop-blur-md p-6 hover:border-purple-500 transition-all h-full [content-visibility:auto] [contain-intrinsic-size:300px] transform-gpu [will-change:transform] [contain:layout_paint_style]">
     <div className="flex items-start gap-4 mb-4">
-      <algorithm.icon className="w-8 h-8 text-signal-violet group-hover:text-cipher-cyan transition-colors flex-shrink-0" />
+      <algorithm.icon className="w-8 h-8 text-purple-400 flex-shrink-0" />
       <div>
-        <h3 className="text-xl font-bold text-signal-violet font-display">{algorithm.name}</h3>
+        <h3 className="text-xl font-bold text-purple-300">{algorithm.name}</h3>
         <div className="flex flex-wrap gap-2 mt-2">
-          <span className="text-xs font-mono px-2 py-1 bg-dusk/50 rounded-full">
+          <span className="text-xs font-mono px-2 py-1 bg-gray-800 rounded-full">
             {algorithm.type}
           </span>
           <span className={`text-xs font-mono px-2 py-1 ${
@@ -187,50 +186,50 @@ const AlgorithmCard = ({ algorithm }: { algorithm: typeof algorithmData[0] }) =>
         <Key className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
         <div>
           <span className="font-semibold">Use Cases:</span>
-          <span className="text-ink-dim ml-2">{algorithm.useCase}</span>
+          <span className="text-gray-400 ml-2">{algorithm.useCase}</span>
         </div>
       </div>
-      <p className="text-ink-dim text-sm leading-relaxed">
+      <p className="text-gray-400 text-sm leading-relaxed">
         {algorithm.description}
       </p>
-      <div className="border-t border-ink-dim/20 pt-3">
+      <div className="border-t border-gray-800 pt-3">
         <h4 className="text-sm font-semibold text-purple-200 mb-2">Key Features:</h4>
-        <ul className="list-disc list-inside space-y-1 text-ink-dim text-sm">
+        <ul className="list-disc list-inside space-y-1 text-gray-400 text-sm">
           {algorithm.features.map((feature, idx) => (
             <li key={idx} className="flex items-start">
-              <span className="text-signal-violet mr-2">▹</span>
+              <span className="text-purple-400 mr-2">▹</span>
               {feature}
             </li>
           ))}
         </ul>
       </div>
     </div>
-  </motion.div>
+  </div>
 );
 
 const DocumentationPage = () => {
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative min-h-screen bg-void text-ink overflow-hidden">
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_0%,var(--signal-violet)_0%,transparent_40%)] opacity-10 pointer-events-none blur-[120px]" />
-      <BackgroundBeams className="absolute top-0 left-0 w-full h-full pointer-events-none z-0 opacity-40" />
+    <div className="relative min-h-screen bg-black text-white">
+     
+      <BackgroundBeams className="absolute top-0 left-0 w-full h-full pointer-events-none z-0" />
       
       {/* Hero Section */}
-      <motion.section initial={{ y: -20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="container mx-auto px-4 py-20 text-center relative z-10">
-        <h1 className="mb-4 text-7xl font-extrabold font-display bg-gradient-to-r from-signal-violet to-cipher-cyan bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(108,92,231,0.3)]">
-          CryptML Documentation
+      <section className="container mx-auto px-4 py-20 text-center relative z-10">
+        <p className="veylora-page-kicker">Veylora / Knowledge base</p>
+        <h1 className="veylora-page-title mb-4 font-extrabold">
+          The cipher field guide.
         </h1>
-        <p className="mx-auto mb-12 max-w-3xl text-lg text-ink-dim">
-          Advanced cryptographic identification system leveraging entropy analysis, statistical modeling, 
-          and ensemble machine learning for algorithm detection with 98.5% accuracy
+        <p className="mx-auto mb-12 max-w-3xl text-lg text-gray-400">
+          Explore the principles, signals, and algorithms behind Veylora's cryptographic intelligence.
         </p>
-      </motion.section>
+      </section>
 
       {/* System Architecture */}
-      <motion.section initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="container mx-auto px-4 pb-20 relative z-10">
-        <div className="rounded-xl border border-signal-violet/20 bg-void/60 backdrop-blur-xl shadow-[0_0_40px_rgba(108,92,231,0.1)] p-8 mb-16">
+      <section className="container mx-auto px-4 pb-20 relative z-10">
+        <div className="rounded-xl border border-gray-800 bg-black/50 backdrop-blur-md p-8 mb-16 transform-gpu [will-change:transform]">
           <div className="flex items-center gap-4 mb-8">
-            <Cpu className="w-8 h-8 text-signal-violet" />
-            <h2 className="text-3xl font-bold font-display">Detection Pipeline</h2>
+            <Cpu className="w-8 h-8 text-purple-400" />
+            <h2 className="text-3xl font-bold">Detection Pipeline</h2>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -239,11 +238,11 @@ const DocumentationPage = () => {
                 <Database className="w-6 h-6 text-green-400" />
                 Data Generation
               </h3>
-              <p className="text-ink-dim">
+              <p className="text-gray-400">
                 Synthetic dataset with 1M+ samples across 15 algorithms, generated using 
                 cryptography libraries with randomized parameters
               </p>
-              <pre className="rounded-lg bg-void/80 border border-ink-dim/10 p-4 text-sm text-cipher-cyan shadow-[inset_0_0_15px_rgba(0,0,0,0.5)] font-mono overflow-x-auto">
+              <pre className="rounded-lg bg-gray-900 p-4 text-sm text-green-400">
                 {`for _ in range(100):\n  key = os.urandom(16)\n  cipher = AES.new(key, AES.MODE_CBC)\n  dataset.append(...)`}
               </pre>
             </div>
@@ -253,13 +252,13 @@ const DocumentationPage = () => {
                 <Code2 className="w-6 h-6 text-blue-400" />
                 Feature Extraction
               </h3>
-              <p className="text-ink-dim">
+              <p className="text-gray-400">
                 7-dimensional feature vector capturing statistical properties:
               </p>
-              <ul className="list-disc list-inside text-ink-dim text-sm space-y-1">
+              <ul className="list-disc list-inside text-gray-400 text-sm space-y-1">
                 {['Entropy', 'Byte distribution', 'Length analysis', '0x30 marker'].map((f, i) => (
                   <li key={i} className="flex items-start">
-                    <span className="text-signal-violet mr-2">▸</span>
+                    <span className="text-purple-400 mr-2">▸</span>
                     {f}
                   </li>
                 ))}
@@ -268,17 +267,17 @@ const DocumentationPage = () => {
 
             <div className="space-y-4">
               <h3 className="text-xl font-semibold flex items-center gap-2">
-                <Network className="w-6 h-6 text-signal-violet" />
+                <Network className="w-6 h-6 text-purple-400" />
                 Model Architecture
               </h3>
-              <p className="text-ink-dim">
+              <p className="text-gray-400">
                 Random Forest classifier with 500 estimators, achieving 98.5% cross-validation accuracy
               </p>
-              <div className="flex items-center justify-between text-sm text-ink-dim">
+              <div className="flex items-center justify-between text-sm text-gray-400">
                 <span>Precision:</span>
                 <span className="text-green-400">98.2%</span>
               </div>
-              <div className="flex items-center justify-between text-sm text-ink-dim">
+              <div className="flex items-center justify-between text-sm text-gray-400">
                 <span>Recall:</span>
                 <span className="text-green-400">98.7%</span>
               </div>
@@ -287,8 +286,8 @@ const DocumentationPage = () => {
         </div>
 
         {/* Algorithm Grid */}
-        <h2 className="text-4xl font-bold mb-8 flex items-center gap-4 font-display">
-          <Terminal className="w-8 h-8 text-signal-violet" />
+        <h2 className="text-4xl font-bold mb-8 flex items-center gap-4">
+          <Terminal className="w-8 h-8 text-purple-400" />
           Supported Algorithms
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -298,28 +297,29 @@ const DocumentationPage = () => {
         </div>
 
         {/* Detection Example */}
-        <div className="mt-16 rounded-xl border border-signal-violet/20 bg-void/60 backdrop-blur-xl shadow-[0_0_40px_rgba(108,92,231,0.1)] p-8">
+        <div className="mt-16 rounded-xl border border-gray-800 bg-black/50 backdrop-blur-md p-8 transform-gpu [will-change:transform]">
           <div className="flex items-center gap-4 mb-6">
-            <Binary className="w-8 h-8 text-signal-violet" />
-            <h2 className="text-3xl font-bold font-display">Sample Detection</h2>
+            <Binary className="w-8 h-8 text-purple-400" />
+            <h2 className="text-3xl font-bold">Sample Detection</h2>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-4">
               <h3 className="text-xl font-semibold">Feature Extraction</h3>
-              <pre className="rounded-lg bg-void/80 border border-ink-dim/10 p-4 text-sm text-cipher-cyan shadow-[inset_0_0_15px_rgba(0,0,0,0.5)] font-mono overflow-x-auto">
+              <pre className="rounded-lg bg-gray-900 p-4 text-sm text-blue-400">
                 {`def extract_features(data_hex):\n  # Calculate entropy, byte distribution\n  # Check 0x30 marker\n  return [entropy, mean, std, ...]`}
               </pre>
             </div>
             <div className="space-y-4">
               <h3 className="text-xl font-semibold">Model Prediction</h3>
-              <pre className="rounded-lg bg-void/80 border border-ink-dim/10 p-4 text-sm text-cipher-cyan shadow-[inset_0_0_15px_rgba(0,0,0,0.5)] font-mono overflow-x-auto">
+              <pre className="rounded-lg bg-gray-900 p-4 text-sm text-green-400">
                 {`RandomForestClassifier(\n  n_estimators=500,\n  max_depth=30,\n  class_weight='balanced'\n)`}
               </pre>
             </div>
           </div>
         </div>
-      </motion.section>
-    </motion.div>
+      </section>
+      
+    </div>
   );
 };
 

@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { BackgroundBeams } from "@/components/ui/background-beams";
 import { Edit, History } from "lucide-react";
-import { motion } from "framer-motion";
 
 export default function ProfilePage() {
   const navigate = useNavigate();
@@ -106,57 +106,63 @@ export default function ProfilePage() {
   };
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative min-h-screen text-ink overflow-hidden pt-24 pb-12">
-      <div className="container mx-auto py-12 px-4 relative z-10">
-        <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="w-full max-w-4xl mx-auto glass-surface p-8">
+    <div className="relative min-h-screen bg-black text-white">
+      <BackgroundBeams className="absolute top-0 left-0 w-full h-full pointer-events-none z-0" />
+
+      <div className="container mx-auto py-12 px-4">
+        <div className="mx-auto mb-6 w-full max-w-4xl">
+          <p className="veylora-page-kicker">Veylora / Profile</p>
+          <h1 className="veylora-page-title font-bold">Your workspace identity.</h1>
+        </div>
+        <div className="w-full max-w-4xl mx-auto rounded-xl border border-gray-800 bg-black/50 backdrop-blur-md p-8 relative z-10">
           <div className="flex flex-col md:flex-row gap-8">
             <div className="flex flex-col items-center space-y-6">
               {/* User Logo with Initials */}
-              <div className="w-20 h-20 flex items-center justify-center bg-accent-violet/20 border border-accent-violet/50 text-accent-violet text-2xl font-headline font-bold rounded-full shadow-[0_0_15px_rgba(124,92,255,0.3)]">
+              <div className="w-20 h-20 flex items-center justify-center bg-purple-600 text-white text-2xl font-bold rounded-full">
                 {getUserInitials()}
               </div>
 
-              <h2 className="text-2xl font-bold text-ink font-headline">
+              <h2 className="text-2xl font-bold text-white">
                 {user.firstName} {user.lastName}
               </h2>
-              <p className="text-ink-dim">@{user.username}</p>
+              <p className="text-gray-400">@{user.username}</p>
             </div>
 
             <div className="flex-1 space-y-8">
               {isEditing ? (
                 <form onSubmit={handleUpdate}>
                   <div className="space-y-6">
-                    <h3 className="text-xl font-semibold text-accent-violet pb-2 border-b border-ink-dim/20 font-headline">
+                    <h3 className="text-xl font-semibold text-purple-400 pb-2 border-b border-gray-800">
                       Personal Information
                     </h3>
 
                     <div className="grid grid-cols-1 gap-6">
                       <LabelInputContainer className="md:col-span-2">
-                        <Label className="text-ink-dim">Username</Label>
+                        <Label className="text-gray-400">Username</Label>
                         <Input
                           name="username"
                           value={pendingChanges.username}
                           onChange={handleChange}
-                          className="bg-transparent border-none text-ink shadow-input"
+                          className="bg-zinc-800 border-none text-white shadow-input"
                         />
                       </LabelInputContainer>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <LabelInputContainer>
-                          <Label className="text-ink-dim">First Name</Label>
+                          <Label className="text-gray-400">First Name</Label>
                           <Input
                             name="firstName"
                             value={pendingChanges.firstName}
                             onChange={handleChange}
-                            className="bg-transparent border-none text-ink shadow-input"
+                            className="bg-zinc-800 border-none text-white shadow-input"
                           />
                         </LabelInputContainer>
                         <LabelInputContainer>
-                          <Label className="text-ink-dim">Last Name</Label>
+                          <Label className="text-gray-400">Last Name</Label>
                           <Input
                             name="lastName"
                             value={pendingChanges.lastName}
                             onChange={handleChange}
-                            className="bg-transparent border-none text-ink shadow-input"
+                            className="bg-zinc-800 border-none text-white shadow-input"
                           />
                         </LabelInputContainer>
                       </div>
@@ -167,7 +173,7 @@ export default function ProfilePage() {
                     <div className="mt-8 flex gap-4">
                       <button
                         type="submit"
-                        className="flex items-center space-x-2 px-6 py-2.5 rounded-full bg-pill-dark text-white font-medium transition-all duration-300 hover:-translate-y-[1px]"
+                        className="flex items-center space-x-2 px-6 py-2.5 rounded-lg bg-purple-600 text-white transition-colors duration-200 hover:bg-purple-700"
                       >
                         <Edit className="w-4 h-4" />
                         <span>Save Changes</span>
@@ -175,7 +181,7 @@ export default function ProfilePage() {
                       <button
                         type="button"
                         onClick={handleNavigateToHistory}
-                        className="flex items-center space-x-2 px-6 py-2.5 rounded-full bg-accent-violet/10 border border-accent-violet/20 text-accent-violet transition-colors duration-200 hover:bg-accent-violet/20 font-medium"
+                        className="flex items-center space-x-2 px-6 py-2.5 rounded-lg bg-purple-600 text-white transition-colors duration-200 hover:bg-purple-700"
                       >
                         <History className="w-4 h-4" />
                         <span>View History</span>
@@ -185,34 +191,34 @@ export default function ProfilePage() {
                 </form>
               ) : (
                 <div className="space-y-6">
-                  <h3 className="text-xl font-semibold text-accent-violet pb-2 border-b border-ink-dim/20 font-headline">
+                  <h3 className="text-xl font-semibold text-purple-400 pb-2 border-b border-gray-800">
                     Personal Information
                   </h3>
 
                   <div className="grid grid-cols-1 gap-6">
                     <LabelInputContainer className="md:col-span-2">
-                      <Label className="text-ink-dim">Username</Label>
+                      <Label className="text-gray-400">Username</Label>
                       <Input
                         value={user.username}
                         disabled
-                        className="bg-transparent border-none text-ink shadow-input"
+                        className="bg-zinc-800 border-none text-white shadow-input"
                       />
                     </LabelInputContainer>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <LabelInputContainer>
-                        <Label className="text-ink-dim">First Name</Label>
+                        <Label className="text-gray-400">First Name</Label>
                         <Input
                           value={user.firstName}
                           disabled
-                          className="bg-transparent border-none text-ink shadow-input"
+                          className="bg-zinc-800 border-none text-white shadow-input"
                         />
                       </LabelInputContainer>
                       <LabelInputContainer>
-                        <Label className="text-ink-dim">Last Name</Label>
+                        <Label className="text-gray-400">Last Name</Label>
                         <Input
                           value={user.lastName}
                           disabled
-                          className="bg-transparent border-none text-ink shadow-input"
+                          className="bg-zinc-800 border-none text-white shadow-input"
                         />
                       </LabelInputContainer>
                     </div>
@@ -222,7 +228,7 @@ export default function ProfilePage() {
                     <button
                       type="button"
                       onClick={handleEdit}
-                      className="flex items-center space-x-2 px-6 py-2.5 rounded-full bg-pill-dark text-white font-medium transition-all duration-300 hover:-translate-y-[1px]"
+                      className="flex items-center space-x-2 px-6 py-2.5 rounded-lg bg-purple-600 text-white transition-colors duration-200 hover:bg-purple-700"
                     >
                       <Edit className="w-4 h-4" />
                       <span>Edit Profile</span>
@@ -230,7 +236,7 @@ export default function ProfilePage() {
                     <button
                       type="button"
                       onClick={handleNavigateToHistory}
-                      className="flex items-center space-x-2 px-6 py-2.5 rounded-full bg-accent-violet/10 border border-accent-violet/20 text-accent-violet transition-colors duration-200 hover:bg-accent-violet/20 font-medium"
+                      className="flex items-center space-x-2 px-6 py-2.5 rounded-lg bg-purple-600 text-white transition-colors duration-200 hover:bg-purple-700"
                     >
                       <History className="w-4 h-4" />
                       <span>View History</span>
@@ -240,9 +246,9 @@ export default function ProfilePage() {
               )}
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 

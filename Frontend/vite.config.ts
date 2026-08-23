@@ -16,7 +16,8 @@ export default defineConfig({
   server: {
     hmr: true,
     watch: {
-      usePolling: false
+      usePolling: false,
+      ignored: ['**/public/**', '**/*.jpeg', '**/*.png']
     }
   },
   optimizeDeps: {

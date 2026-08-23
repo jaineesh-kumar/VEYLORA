@@ -4,6 +4,7 @@ import {
     AlertCircle, Hourglass, Key, Cpu, History, BarChart3, Info
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { BackgroundBeams } from './ui/background-beams';
 import { TypewriterEffect } from './ui/typewriter-effect';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
@@ -261,21 +262,21 @@ const PredictionPage = () => {
         const displayName = key && algorithmDetails[key] ? algorithmDetails[key].name : algorithm;
 
         return (
-            <div className={`p-3 rounded-lg border transition-all duration-300 hover:scale-[1.02] ${isTop ? 'border-accent-violet bg-accent-violet/10 shadow-sm' : 'border-ink-dim/20 bg-white/10'}`}>
+            <div className={`p-3 rounded-lg border ${isTop ? 'border-purple-500 bg-purple-900/30' : 'border-gray-800 bg-gray-900/50'}`}>
                 <div className="flex items-center justify-between mb-1">
-                    <span className={`text-sm font-medium font-headline ${isTop ? 'text-accent-violet' : 'text-ink-dim'}`}>
+                    <span className={`text-sm font-medium ${isTop ? 'text-purple-300' : 'text-gray-300'}`}>
                         {displayName}
                     </span>
-                    <span className={`text-sm font-mono ${isTop ? 'text-accent-blue' : 'text-ink-dim/70'}`}>
+                    <span className={`text-sm font-mono ${isTop ? 'text-purple-400' : 'text-gray-500'}`}>
                         {pct}%
                     </span>
                 </div>
-                <div className="w-full bg-white/30 rounded-full h-2 overflow-hidden border border-ink-dim/10">
+                <div className="w-full bg-gray-800 rounded-full h-2">
                     <motion.div
-                        className={`h-2 rounded-full ${isTop ? 'bg-gradient-to-r from-accent-violet to-accent-blue shadow-sm' : 'bg-ink-dim/50'}`}
+                        className={`h-2 rounded-full ${isTop ? 'bg-gradient-to-r from-purple-500 to-blue-500' : 'bg-gray-600'}`}
                         initial={{ width: 0 }}
                         animate={{ width: `${pct}%` }}
-                        transition={{ duration: 1, ease: 'easeOut' }}
+                        transition={{ duration: 0.6, ease: 'easeOut' }}
                     />
                 </div>
             </div>
@@ -286,16 +287,16 @@ const PredictionPage = () => {
         <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="p-4 bg-white/30 backdrop-blur-sm border border-ink-dim/10 rounded-lg hover:border-accent-violet/30 transition-colors"
+            className="p-4 bg-gray-900 rounded-lg"
         >
             <div className="flex items-center gap-2 mb-3">
-                <Icon className="w-5 h-5 text-accent-violet" />
-                <h3 className="font-semibold text-accent-violet/80">{title}</h3>
+                <Icon className="w-5 h-5 text-purple-400" />
+                <h3 className="font-semibold text-purple-300">{title}</h3>
             </div>
             <ul className="space-y-2">
                 {items.map((item, idx) => (
-                    <li key={idx} className="flex items-start text-ink-dim">
-                        <span className="text-accent-violet mr-2">▹</span>
+                    <li key={idx} className="flex items-start text-gray-400">
+                        <span className="text-purple-400 mr-2">▹</span>
                         {item}
                     </li>
                 ))}
@@ -304,50 +305,51 @@ const PredictionPage = () => {
     );
 
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative min-h-screen text-ink overflow-hidden pt-24 pb-12">
+        <div className="relative min-h-screen bg-black text-white">
+            <BackgroundBeams className="absolute top-0 left-0 w-full h-full pointer-events-none z-0" />
             <div className="container mx-auto px-4 py-12 relative z-10">
                 {/* Header */}
-                <motion.div initial={{ y: -20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="text-center mb-12">
-                    <h1 className="text-5xl font-semibold mb-4 font-headline text-ink">
-                        Cryptographic Analysis
+                <div className="text-center mb-12">
+                    <p className="veylora-page-kicker">Veylora / Detector</p>
+                    <h1 className="veylora-page-title font-bold mb-4">
+                        Read the hidden signal.
                     </h1>
-                    <p className="text-ink-dim max-w-2xl mx-auto font-body text-lg">
-                        Identify cryptographic algorithms using AI-powered pattern recognition and statistical analysis
+                    <p className="text-gray-400 max-w-2xl mx-auto">
+                        Paste a hexadecimal payload to reveal its cryptographic family, confidence score, and supporting evidence.
                     </p>
-                </motion.div>
+                </div>
 
                 {/* Main */}
                 <div className="grid lg:grid-cols-3 gap-8">
                     {/* Input + Results */}
                     <div className="lg:col-span-2 space-y-6">
-                        <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.1 }} className="glass-surface p-6">
+                        <div className="rounded-xl border border-gray-800 bg-black/50 backdrop-blur-md p-6 transform-gpu [will-change:transform]">
                             <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-xl font-semibold flex items-center gap-2 font-headline">
-                                    <Search className="w-6 h-6 text-accent-violet" /> Analyze HEX Input
+                                <h2 className="text-xl font-semibold flex items-center gap-2">
+                                    <Search className="w-6 h-6 text-purple-400" /> Analyze HEX Input
                                 </h2>
-                                <button onClick={() => copyToClipboard(inputHex)} className="flex items-center gap-2 text-sm text-ink-dim hover:text-ink">
+                                <button onClick={() => copyToClipboard(inputHex)} className="flex items-center gap-2 text-sm text-gray-400 hover:text-white">
                                     <Clipboard className="w-5 h-5" /> Copy
                                 </button>
                             </div>
                             <textarea
                                 value={inputHex}
                                 onChange={e => setInputHex(e.target.value)}
-                                className="w-full h-32 bg-white/30 rounded-lg p-4 border border-ink-dim/20 focus:border-accent-blue focus:ring-1 focus:ring-accent-blue resize-none font-mono text-sm text-ink transition-all placeholder:text-ink-dim/60 outline-none"
+                                className="w-full h-32 bg-gray-900 rounded-lg p-4 border border-gray-800 focus:ring-purple-500 resize-none font-mono text-sm"
                                 placeholder="Paste HEX data — continuous (a42369...) or space-separated (A4 23 69 9F ...)"
-                                spellCheck="false"
                             />
                             <button
                                 onClick={handlePredict}
                                 disabled={loading}
-                                className="w-full mt-6 bg-pill-dark text-white hover:opacity-90 px-6 py-4 rounded-full font-medium transition-all flex items-center justify-center gap-2 hover:-translate-y-[1px]"
+                                className="w-full mt-6 border-2 border-purple-500 hover:bg-purple-600/20 text-white px-6 py-4 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] [will-change:transform,box-shadow]"
                             >
                                 {loading ? (
-                                    <><Hourglass className="w-5 h-5 animate-spin" /> Analyzing Ciphertext...</>
+                                    <><Hourglass className="w-5 h-5 animate-spin" /> Analyzing...</>
                                 ) : (
                                     <><Terminal className="w-5 h-5" /> Detect Algorithm</>
                                 )}
                             </button>
-                        </motion.div>
+                        </div>
 
                         {/* Results */}
                         <AnimatePresence>
@@ -359,18 +361,17 @@ const PredictionPage = () => {
                                     className="space-y-6"
                                 >
                                     {/* Top Predictions with Confidence Bars */}
-                                    <div className="glass-surface p-6 relative overflow-hidden">
-                                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-violet to-accent-blue"></div>
+                                    <div className="rounded-xl border border-purple-800 bg-purple-900/20 backdrop-blur-md p-6 transform-gpu [will-change:transform]">
                                         <div className="flex items-center gap-3 mb-5">
-                                            <Shield className="w-8 h-8 text-accent-violet" />
+                                            <Shield className="w-8 h-8 text-purple-400" />
                                             <div className="flex items-center gap-3">
                                                 <TypewriterEffect
                                                     key={prediction.topPredictions[0].algorithm + inputHex}
                                                     text={[{
                                                         text: `Detected: ${prediction.topPredictions[0].algorithm}`,
-                                                        className: "text-2xl font-bold font-headline bg-gradient-to-r from-accent-violet to-accent-blue bg-clip-text text-transparent"
+                                                        className: "text-2xl font-bold bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent"
                                                     }]}
-                                                    cursorClassName="bg-accent-blue"
+                                                    cursorClassName="bg-purple-400"
                                                 />
                                                 {prediction.analysis?.isAmbiguous && (
                                                     <span className="px-2 py-1 text-xs font-semibold bg-orange-500/20 text-orange-400 border border-orange-500/50 rounded-md">
@@ -381,14 +382,14 @@ const PredictionPage = () => {
                                         </div>
 
                                         <div className="mb-4">
-                                            <span className="text-sm text-ink-dim">
-                                                Family: <span className="text-accent-violet font-medium">{prediction.family}</span>
+                                            <span className="text-sm text-gray-400">
+                                                Family: <span className="text-purple-300 font-medium">{prediction.family}</span>
                                             </span>
                                         </div>
 
                                         {/* Confidence Bars for all predictions */}
                                         <div className="space-y-2">
-                                            <h3 className="text-sm font-medium text-ink-dim flex items-center gap-2 mb-3">
+                                            <h3 className="text-sm font-medium text-gray-400 flex items-center gap-2 mb-3">
                                                 <BarChart3 className="w-4 h-4" /> Probability Rankings
                                             </h3>
                                             {prediction.topPredictions.map((pred, idx) => (
@@ -404,9 +405,9 @@ const PredictionPage = () => {
 
                                     {/* Analysis Metadata */}
                                     {prediction.analysis && (
-                                        <div className="glass-surface p-6">
-                                            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 font-headline">
-                                                <Info className="w-5 h-5 text-accent-blue" /> Statistical Analysis
+                                        <div className="rounded-xl border border-gray-800 bg-black/50 backdrop-blur-md p-6 transform-gpu [will-change:transform]">
+                                            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                                                <Info className="w-5 h-5 text-blue-400" /> Statistical Analysis
                                             </h3>
                                             
                                             {/* Insights */}
@@ -420,23 +421,22 @@ const PredictionPage = () => {
                                                     ))}
                                                 </div>
                                             )}
-                                            
-                                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                                <div className="p-3 bg-white/30 border border-ink-dim/10 rounded-lg text-center hover:border-accent-violet/30 transition-all">
-                                                    <div className="text-xs text-ink-dim/70 mb-1 font-headline">Data Length</div>
-                                                    <div className="text-lg font-mono text-accent-blue">{prediction.analysis.length} bytes</div>
+                                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 [contain:layout_paint_style]">
+                                                <div className="p-3 bg-gray-900 rounded-lg text-center">
+                                                    <div className="text-xs text-gray-500 mb-1">Data Length</div>
+                                                    <div className="text-lg font-mono text-blue-300">{prediction.analysis.length} bytes</div>
                                                 </div>
-                                                <div className="p-3 bg-white/30 border border-ink-dim/10 rounded-lg text-center hover:border-accent-violet/30 transition-all">
-                                                    <div className="text-xs text-ink-dim/70 mb-1 font-headline">Entropy</div>
-                                                    <div className="text-lg font-mono text-accent-blue">{prediction.analysis.entropy?.toFixed(3) ?? 'N/A'}</div>
+                                                <div className="p-3 bg-gray-900 rounded-lg text-center">
+                                                    <div className="text-xs text-gray-500 mb-1">Entropy</div>
+                                                    <div className="text-lg font-mono text-blue-300">{prediction.analysis.entropy?.toFixed(3) ?? 'N/A'}</div>
                                                 </div>
-                                                <div className="p-3 bg-white/30 border border-ink-dim/10 rounded-lg text-center hover:border-accent-violet/30 transition-all">
-                                                    <div className="text-xs text-ink-dim/70 mb-1 font-headline">Method</div>
-                                                    <div className="text-sm font-mono text-accent-blue">{prediction.analysis.classificationMethod?.replace(/_/g, ' ')}</div>
+                                                <div className="p-3 bg-gray-900 rounded-lg text-center">
+                                                    <div className="text-xs text-gray-500 mb-1">Method</div>
+                                                    <div className="text-sm font-mono text-blue-300">{prediction.analysis.classificationMethod?.replace(/_/g, ' ')}</div>
                                                 </div>
-                                                <div className="p-3 bg-white/30 border border-ink-dim/10 rounded-lg text-center hover:border-accent-violet/30 transition-all">
-                                                    <div className="text-xs text-ink-dim/70 mb-1 font-headline">Block Aligned</div>
-                                                    <div className="text-sm font-mono text-accent-blue">
+                                                <div className="p-3 bg-gray-900 rounded-lg text-center">
+                                                    <div className="text-xs text-gray-500 mb-1">Block Aligned</div>
+                                                    <div className="text-sm font-mono text-blue-300">
                                                         {prediction.analysis.blockAligned16 ? '16-byte ✓' : prediction.analysis.blockAligned8 ? '8-byte ✓' : 'No'}
                                                     </div>
                                                 </div>
@@ -446,7 +446,7 @@ const PredictionPage = () => {
 
                                     {/* Detailed Algorithm Info */}
                                     {showDetails && topAlgoDetails && (
-                                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid md:grid-cols-2 gap-4">
+                                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="grid md:grid-cols-2 gap-4 [content-visibility:auto] [contain-intrinsic-size:1000px]">
                                             <DetailSection title="Use Cases" icon={Zap} items={topAlgoDetails.useCases} />
                                             <DetailSection title="Strengths" icon={Lock} items={topAlgoDetails.strengths} />
                                             <DetailSection title="Weaknesses" icon={AlertCircle} items={topAlgoDetails.weaknesses} />
@@ -462,14 +462,14 @@ const PredictionPage = () => {
                     </div>
 
                     {/* Sidebar: History & Guide */}
-                    <motion.div initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.2 }} className="space-y-6">
-                        <div className="glass-surface p-6">
-                            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 font-headline">
-                                <History className="w-6 h-6 text-accent-violet" /> Analysis History
+                    <div className="space-y-6">
+                        <div className="rounded-xl border border-gray-800 bg-black/50 backdrop-blur-md p-6 [content-visibility:auto] [contain-intrinsic-size:1000px] transform-gpu [will-change:transform]">
+                            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                                <History className="w-6 h-6 text-purple-400" /> Analysis History
                             </h3>
                             <div className="space-y-3">
                                 {history.length === 0 && (
-                                    <p className="text-sm text-ink-dim">No analyses yet. Paste hex data above to get started.</p>
+                                    <p className="text-sm text-gray-600">No analyses yet. Paste hex data above to get started.</p>
                                 )}
                                 {history.map((entry, idx) => {
                                     const topAlgo = entry.result.topPredictions?.[0]?.algorithm ?? 'Unknown';
@@ -480,17 +480,17 @@ const PredictionPage = () => {
                                     return (
                                         <div
                                             key={idx}
-                                            className="p-3 bg-white/30 rounded-lg border border-ink-dim/10 hover:border-accent-violet/50 cursor-pointer transition-all hover:scale-[1.02]"
+                                            className="p-3 bg-gray-900 rounded-lg border border-gray-800 hover:border-purple-500 cursor-pointer transition-colors [contain:layout_paint_style]"
                                             onClick={() => {
                                                 setInputHex(entry.input);
                                                 setPrediction(entry.result);
                                             }}
                                         >
                                             <div className="flex items-center justify-between">
-                                                <span className="text-sm font-mono text-ink-dim">
+                                                <span className="text-sm font-mono text-gray-400">
                                                     {entry.input.slice(0, 20)}...
                                                 </span>
-                                                <span className="text-accent-violet text-sm">
+                                                <span className="text-purple-400 text-sm">
                                                     {displayName} ({Math.round(confidence * 100)}%)
                                                 </span>
                                             </div>
@@ -500,22 +500,22 @@ const PredictionPage = () => {
                             </div>
                         </div>
 
-                        <div className="glass-surface p-6">
-                            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 font-headline">
-                                <Key className="w-6 h-6 text-accent-violet" /> Supported Algorithms
+                        <div className="rounded-xl border border-gray-800 bg-black/50 backdrop-blur-md p-6 transform-gpu [will-change:transform]">
+                            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                                <Key className="w-6 h-6 text-purple-400" /> Supported Algorithms
                             </h3>
                             <div className="grid grid-cols-2 gap-2">
                                 {Object.keys(algorithmDetails).map(algo => (
-                                    <div key={algo} className="p-2 text-sm bg-white/30 rounded border border-ink-dim/10 hover:border-accent-violet/50 font-mono text-center transition-colors">
+                                    <div key={algo} className="p-2 text-sm bg-gray-900 rounded border border-gray-800 hover:border-purple-500">
                                         {algorithmDetails[algo].name}
                                     </div>
                                 ))}
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
             </div>
-        </motion.div>
+        </div>
     );
 };
 
