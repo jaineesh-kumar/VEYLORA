@@ -82,7 +82,7 @@ A comprehensive reference covering the detection pipeline, feature extraction me
 
 This diagram illustrates the high-level architecture of the VEYLORA platform. It outlines how a user interacts with the web or mobile interface, which communicates with the Application Server. The server orchestrates authentication, interacts with the PostgreSQL database, and delegates cryptographic analysis to the Random Forest ML Service before returning the processed results to the user.
 
-![Overall System Data Flow](Architecture%20%26%20Workflow/Overall%20System%20Data%20Flow.jpeg)
+![Overall System Data Flow](Architecture/Overall%20System%20Data%20Flow.jpeg)
 
 ---
 
@@ -90,7 +90,7 @@ This diagram illustrates the high-level architecture of the VEYLORA platform. It
 
 The ML data flow details the Random Forest prediction model. The system ingests original training data, randomizes it, and distributes it across multiple decision trees. The individual predictions are then aggregated using voting or averaging to produce a highly accurate final prediction.
 
-![Random Forest ML Architecture Data Flow](Architecture%20%26%20Workflow/Random%20Forest%20ML%20Architecture%20Data%20Flow.jpeg)
+![Random Forest ML Architecture Data Flow](Architecture/Random%20Forest%20ML%20Architecture%20Data%20Flow.jpeg)
 
 ---
 
@@ -98,7 +98,7 @@ The ML data flow details the Random Forest prediction model. The system ingests 
 
 This flowchart outlines the secure user authentication lifecycle. It covers the entire journey from user registration (Sign Up) and login credential validation, through successful authentication and session management (including token refreshing), to logging out and ending the session.
 
-![User Authentication Data Flow](Architecture%20%26%20Workflow/User%20Authentication%20Data%20Flow.jpeg)
+![User Authentication Data Flow](Architecture/User%20Authentication%20Data%20Flow.jpeg)
 
 ---
 
@@ -106,7 +106,7 @@ This flowchart outlines the secure user authentication lifecycle. It covers the 
 
 The prediction pipeline follows a structured approach. When a user uploads a cryptographic dataset, the system preprocesses it to extract features. The model analyzes these features and either successfully identifies the algorithm or throws a prediction exception if unrecognized.
 
-![Prediction Activity Diagram](Architecture%20%26%20Workflow/Final_Prediction_Activity.png)
+![Prediction Activity Diagram](Architecture/Final_Prediction_Activity.png)
 
 ---
 
@@ -114,7 +114,7 @@ The prediction pipeline follows a structured approach. When a user uploads a cry
 
 This diagram breaks down the authentication process into three distinct flows: User Signup, User Login, and Refresh Token. It details credential validation, error handling, and the generation of secure Access and Refresh tokens.
 
-![Authentication Activity Diagram](Architecture%20%26%20Workflow/Final_Authentication_Activity.png)
+![Authentication Activity Diagram](Architecture/Final_Authentication_Activity.png)
 
 ---
 
@@ -122,7 +122,7 @@ This diagram breaks down the authentication process into three distinct flows: U
 
 The encryption module handles secure data transformations. Users select an encryption algorithm and provide plaintext input. The system initializes parameters (like keys and IVs) and performs the encryption, returning the ciphertext upon success.
 
-![Encryption Activity Diagram](Architecture%20%26%20Workflow/Final_Encryption_Activity.png)
+![Encryption Activity Diagram](Architecture/Final_Encryption_Activity.png)
 
 ---
 
@@ -130,7 +130,7 @@ The encryption module handles secure data transformations. Users select an encry
 
 The Level 0 context diagram shows the primary interactions between the user and the AI/ML-Based Cryptographic Algorithm Identification System. Level 1 and Level 2 diagrams break down user management, data ingestion, and the intricate steps of the ML model prediction process.
 
-![System Context Diagram](Architecture%20%26%20Workflow/Final_Class_Diagram.png)
+![System Context Diagram](Architecture/Final_Class_Diagram.png)
 
 ---
 
@@ -138,7 +138,7 @@ The Level 0 context diagram shows the primary interactions between the user and 
 
 The use case diagram highlights the primary actors and their interactions with the system, such as generating signatures, encrypting data, viewing search history, and predicting algorithms.
 
-![Use Case Diagram](Architecture%20%26%20Workflow/UseCaseDiagram.png)
+![Use Case Diagram](Architecture/UseCaseDiagram.png)
 
 ---
 
@@ -148,9 +148,9 @@ These sequence diagrams map the step-by-step interactions between system compone
 
 | Flow | Diagram |
 |------|---------|
-| **Login** | ![Login Sequence](Architecture%20%26%20Workflow/Final_login.png) |
-| **Signup** | ![Signup Sequence](Architecture%20%26%20Workflow/Final_Signup.png) |
-| **Token Refresh** | ![Refresh Sequence](Architecture%20%26%20Workflow/Final_Refresh.png) |
+| **Login** | ![Login Sequence](Architecture/Final_login.png) |
+| **Signup** | ![Signup Sequence](Architecture/Final_Signup.png) |
+| **Token Refresh** | ![Refresh Sequence](Architecture/Final_Refresh.png) |
 
 ---
 
@@ -160,8 +160,8 @@ The state diagrams illustrate the lifecycle and various states of different syst
 
 | Component | Diagram |
 |-----------|---------|
-| **Prediction** | ![Prediction State](Architecture%20%26%20Workflow/State_Prediction_final.png) |
-| **Encryption** | ![Encryption State](Architecture%20%26%20Workflow/State_Final_Encrypting.png) |
+| **Prediction** | ![Prediction State](Architecture/State_Prediction_final.png) |
+| **Encryption** | ![Encryption State](Architecture/State_Final_Encrypting.png) |
 
 
 ---
