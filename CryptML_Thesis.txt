@@ -1,0 +1,87 @@
+=============================================================================
+TITLE: AI/ML-Based Cryptographic Algorithm Identification
+=============================================================================
+
+ABSTRACT
+In the contemporary digital landscape, cryptographic algorithms serve as the primary defense mechanism for securing communications, protecting data integrity, and ensuring privacy. However, vulnerabilities often arise from the use of deprecated algorithms or improper implementations. Identifying the specific cryptographic algorithm from a raw data stream is traditionally a highly complex and manual process. This thesis presents CryptML, an intelligent, automated system designed to identify cryptographic algorithms from modern datasets. Utilizing a hybrid classification approach that combines deterministic structural rules with statistical Machine Learning (ML), the system accurately analyzes data patterns and features. The resulting application bridges the gap between machine learning and cybersecurity, providing security analysts with a powerful tool to detect algorithms, automate analysis, and highlight potential implementation weaknesses in real-time.
+
+1. INTRODUCTION
+
+1.1 Problem Statement
+As cyber threats grow increasingly sophisticated, attackers frequently exploit systems relying on weak, deprecated, or misconfigured cryptographic algorithms. For security analysts, identifying the specific cryptographic algorithm used in a given intercepted dataset or communication stream is a critical first step in vulnerability assessment. Done manually, this process is heuristic, error-prone, and highly inefficient, failing to scale against the diverse array of modern cryptographic standards (e.g., AES, RSA, ECC, ChaCha20).
+
+1.2 Objectives
+The primary goal of this project is to develop an AI/ML-based system capable of:
+- Analyzing hidden statistical data patterns and structural features to determine the cryptographic algorithm used.
+- Automating the identification process to reduce manual effort and human error.
+- Providing immediate insights into potential weaknesses (such as detecting insecure ECB block modes).
+- Offering a comprehensive platform complete with a user-friendly frontend and robust backend architecture.
+
+1.3 Real-World Impact
+This tool revolutionizes cryptographic security by allowing organizations to quickly detect and mitigate vulnerabilities. It serves as a foundational building block for smarter, AI-driven security ecosystems, contributing significantly to global efforts in combating cybercrime.
+
+2. SYSTEM ARCHITECTURE & TECHNOLOGY STACK
+
+The project is built on a highly scalable, decoupled architecture comprising a frontend, backend, and an integrated machine learning engine.
+
+2.1 Frontend Architecture
+The user interface is developed using React and Vite, ensuring a fast and efficient user experience. Styling is handled via Tailwind CSS and PostCSS, while prebuilt UI components from Aceternity UI and ShadCN provide a modern, responsive design. Axios is utilized for seamless REST API communication with the backend.
+
+2.2 Backend Architecture
+The core business logic and API routing are powered by Java and Spring Boot.
+- Security: Secured using Spring Security and JSON Web Tokens (JWT) for authentication and session management.
+- Data Persistence: PostgreSQL (or MySQL) is used alongside JPA/Hibernate to manage user profiles and historical cryptographic data.
+- Cryptographic Services: Native Java cryptographic libraries are used for backend encryption tasks, supporting AES, DES, Blowfish, RSA, DSA, ECDSA, and more.
+
+2.3 Machine Learning Integration
+The intelligence of the system resides in a Python 3 environment. The backend invokes a Python script (`predict.py`) via the Java `ProcessBuilder`, passing raw hexadecimal or base64 inputs. The Python script utilizes Scikit-Learn, Pandas, NumPy, and SciPy to perform feature extraction and classification, returning a structured JSON response to the backend.
+
+3. METHODOLOGY: THE HYBRID CLASSIFIER
+
+Cryptographic data, by design, aims to achieve maximum entropy (pseudo-randomness), making purely statistical classification exceptionally difficult. To overcome this, CryptML employs a 3-Layer Hybrid Classifier.
+
+3.1 Layer 1: Data Normalization and Feature Extraction
+The system accepts space-separated hex, continuous hex, or Base64, converting it into raw bytes. From these bytes, 27 distinct features are extracted, including:
+- Basic Statistics: Length, Mean, Median, Standard Deviation.
+- Information Theory Metrics: Shannon Entropy, Bit Entropy.
+- Structural Indicators: Modulo 8 and Modulo 16 alignments, DER encoding checks (starting with 0x30).
+- Randomness Tests: Chi-Square statistic, P-value, Byte frequencies, Auto-correlation at offsets 1, 2, and 8.
+- Repetition Metrics: Block repetition detection to identify modes like Electronic Codebook (ECB).
+
+3.2 Layer 2: Rule-Based Deterministic Classification
+Before applying ML, the system runs the extracted features through a deterministic rules engine. 
+- Exact Length & Entropy: E.g., 20 bytes with high entropy strongly indicates SHA-1; 128 bytes with high entropy indicates RSA-1024.
+- Encoding Standards: Presence of DER encoding structures points directly to DSA or ECDSA signatures.
+- ECB Mode Leakage: Repeated 8-byte or 16-byte blocks immediately flag DES/3DES-ECB or AES-ECB.
+If a rule yields a high confidence score (>= 80%), the system bypasses the ML layer to save computational resources and maximize accuracy.
+
+3.3 Layer 3: Machine Learning Classification
+For inputs that are ambiguous or do not trigger a high-confidence rule (such as distinguishing between AES, RC4, or ChaCha20), the system falls back to a Random Forest Classifier. The model evaluates the 27 features and outputs a probability distribution across algorithms. 
+
+3.4 Hybrid Merging
+The final output merges the rule-based predictions (weighted at 60%) and ML predictions (weighted at 40%). This ensures structural facts outweigh statistical guesses, while still allowing the ML model to assist in ambiguous cases.
+
+4. EXPERIMENTAL RESULTS AND EVALUATION
+
+4.1 Dataset and Training
+The model was trained on a generated dataset of 1,447 samples spanning 8 classes (AES, 3DES, DES, Blowfish, RC4, ChaCha20, RSA, DSA). The Random Forest model was configured with 200 estimators and balanced class weights to handle data disparities.
+
+4.2 Model Performance
+The current iteration of the Random Forest model achieves the following metrics:
+- 5-Fold Cross-Validation Accuracy: ~50.66%
+- Train/Test Split Accuracy (80/20): ~52.8%
+
+4.3 Analysis of Results
+- High Precision Classes: The model achieves 100% precision and recall for algorithms like RSA and DSA. This is because asymmetric keys and signatures possess distinct mathematical constraints and structural formatting (like padding and DER structures) that drastically differentiate them from random noise.
+- Ambiguous Classes: The model struggles with symmetric block ciphers and stream ciphers (e.g., AES, RC4, ChaCha20). Because modern symmetric encryption is designed to produce output statistically indistinguishable from true randomness, differentiating between two secure block ciphers based solely on ciphertext is theoretically near-impossible. The system correctly identifies these as "ambiguous" when the confidence drops below 65%, successfully preventing false positives.
+
+5. CONCLUSION AND FUTURE WORK
+
+CryptML successfully demonstrates the viability of automating cryptographic algorithm identification using a hybrid Rule-Based and Machine Learning approach. While perfectly classifying highly-entropic symmetric ciphertext remains a fundamental mathematical challenge, the system excels at identifying structural protocols (RSA, DSA, Hashes) and detecting severe vulnerabilities like ECB mode usage.
+
+Future Work:
+- Deep Learning: Implementing neural networks (e.g., LSTMs or 1D-CNNs) to detect subtle non-linear patterns that Random Forest may miss.
+- Protocol Context: Expanding the system to analyze network packet headers alongside the raw payload to provide contextual clues for algorithm identification.
+- Extended Dataset: Training on a larger, more diverse dataset including newer post-quantum cryptographic algorithms.
+
+=============================================================================
