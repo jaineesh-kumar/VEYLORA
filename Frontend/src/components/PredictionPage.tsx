@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
     Terminal, Clipboard, Search, Zap, Shield, Lock,
-    AlertCircle, Hourglass, Key, Cpu, History, BarChart3, Info
+    AlertCircle, Hourglass, Key, Cpu, History, BarChart3, Info, CheckCircle
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BackgroundBeams } from './ui/background-beams';
@@ -199,6 +199,11 @@ const PredictionPage = () => {
     const [loading, setLoading] = useState(false);
     const [history, setHistory] = useState<{ input: string; result: PredictionResponse }[]>([]);
     const [showDetails, setShowDetails] = useState(true);
+    
+    // Feedback State
+    const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+    const [selectedCorrection, setSelectedCorrection] = useState('');
+    const [isCorrectPrediction, setIsCorrectPrediction] = useState<boolean | null>(null);
 
     const handlePredict = async () => {
         // Allow space-separated hex now (A4 23 69 9F ...) as well as continuous hex
@@ -232,6 +237,9 @@ const PredictionPage = () => {
             }
 
             setPrediction(data);
+            setFeedbackSubmitted(false);
+            setIsCorrectPrediction(null);
+            setSelectedCorrection('');
             setHistory(prev => [{ input: inputHex, result: data }, ...prev.slice(0, 5)]);
             setShowDetails(true);
             toast.success('Analysis complete!');
@@ -241,6 +249,36 @@ const PredictionPage = () => {
             toast.error(msg);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleFeedbackSubmit = async (isCorrect: boolean = false) => {
+        if (!prediction) return;
+        
+        let actualAlgo = prediction.topPredictions[0].algorithm;
+        if (!isCorrect) {
+            if (!selectedCorrection) {
+                toast.error("Please select the correct algorithm.");
+                return;
+            }
+            actualAlgo = selectedCorrection;
+        }
+
+        try {
+            const token = localStorage.getItem('token');
+            const headers = token ? { Authorization: `Bearer ${token}` } : {};
+
+            await axios.post(
+                `${API_BASE}/api/ml/feedback`,
+                { input_hex: inputHex, actual_algorithm: actualAlgo },
+                { headers }
+            );
+
+            setFeedbackSubmitted(true);
+            toast.success("Thank you! The model will learn from this in the next training run.");
+        } catch (err) {
+            console.error('Feedback error:', err);
+            toast.error("Failed to submit feedback.");
         }
     };
 
@@ -441,6 +479,43 @@ const PredictionPage = () => {
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                    )}
+
+                                    {/* Feedback Section */}
+                                    {!feedbackSubmitted ? (
+                                        <div className="rounded-xl border border-gray-800 bg-black/50 backdrop-blur-md p-6 transform-gpu [will-change:transform]">
+                                            <h3 className="text-lg font-semibold mb-4">Was this prediction correct?</h3>
+                                            
+                                            {isCorrectPrediction === null ? (
+                                                <div className="flex gap-4">
+                                                    <button onClick={() => { setIsCorrectPrediction(true); handleFeedbackSubmit(true); }} className="flex-1 py-2 px-4 rounded-lg border border-green-500/50 bg-green-900/20 text-green-300 hover:bg-green-900/40 transition-colors">Yes, it's correct</button>
+                                                    <button onClick={() => setIsCorrectPrediction(false)} className="flex-1 py-2 px-4 rounded-lg border border-red-500/50 bg-red-900/20 text-red-300 hover:bg-red-900/40 transition-colors">No, it's wrong</button>
+                                                </div>
+                                            ) : isCorrectPrediction === false ? (
+                                                <div className="space-y-4">
+                                                    <p className="text-sm text-gray-400">Help the model learn! What was the actual algorithm?</p>
+                                                    <select
+                                                        value={selectedCorrection}
+                                                        onChange={(e) => setSelectedCorrection(e.target.value)}
+                                                        className="w-full bg-gray-900 border border-gray-700 text-white rounded-lg p-3 focus:ring-purple-500"
+                                                    >
+                                                        <option value="">Select correct algorithm...</option>
+                                                        {Object.values(algorithmDetails).map(algo => (
+                                                            <option key={algo.name} value={algo.name}>{algo.name}</option>
+                                                        ))}
+                                                    </select>
+                                                    <div className="flex gap-3">
+                                                        <button onClick={() => handleFeedbackSubmit(false)} className="flex-1 py-2 px-4 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-medium transition-colors">Submit Correction</button>
+                                                        <button onClick={() => setIsCorrectPrediction(null)} className="py-2 px-4 rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            ) : null}
+                                        </div>
+                                    ) : (
+                                        <div className="rounded-xl border border-green-900 bg-green-900/20 p-6 flex items-center justify-center gap-3 text-green-400">
+                                            <CheckCircle className="w-6 h-6" />
+                                            <span className="font-medium">Feedback received. Thanks for training Veylora!</span>
                                         </div>
                                     )}
 

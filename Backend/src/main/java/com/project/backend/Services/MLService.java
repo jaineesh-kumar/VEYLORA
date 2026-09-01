@@ -19,6 +19,7 @@ import java.util.Optional;
 public class MLService {
     private static final Logger log = LoggerFactory.getLogger(MLService.class);
     private static final String PYTHON_SCRIPT = "src/main/resources/scripts/predict.py";
+    private static final String FEEDBACK_SCRIPT = "src/main/resources/scripts/add_feedback.py";
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     /**
@@ -155,5 +156,34 @@ public class MLService {
             }
         }
         return list;
+    }
+
+    /**
+     * Executes the Python script to append feedback to the training data.
+     */
+    public void saveFeedback(String inputHex, String actualAlgorithm) {
+        log.info("Saving feedback for algorithm: {}", actualAlgorithm);
+        try {
+            String pythonCommand = System.getProperty("os.name").toLowerCase().contains("win") ? "python" : "python3";
+            ProcessBuilder processBuilder = new ProcessBuilder(pythonCommand, FEEDBACK_SCRIPT, inputHex, actualAlgorithm);
+            processBuilder.redirectErrorStream(true);
+            Process process = processBuilder.start();
+            
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            StringBuilder output = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                output.append(line).append("\n");
+            }
+            
+            int exitCode = process.waitFor();
+            if (exitCode != 0) {
+                log.error("Feedback script failed with exit code {}: {}", exitCode, output.toString().trim());
+            } else {
+                log.info("Feedback script success: {}", output.toString().trim());
+            }
+        } catch (Exception e) {
+            log.error("Exception caught while saving feedback.", e);
+        }
     }
 }

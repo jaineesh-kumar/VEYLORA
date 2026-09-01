@@ -78,4 +78,28 @@ public class MLController {
                     .body(Map.of("error", "Prediction failed. Check server logs."));
         }
     }
+
+    /**
+     * POST /api/ml/feedback
+     * Accepts: { "input_hex": "...", "actual_algorithm": "..." }
+     * Appends the corrected data to the training dataset.
+     */
+    @PostMapping("/feedback")
+    public ResponseEntity<?> receiveFeedback(@RequestBody Map<String, String> input) {
+        log.info("Received feedback request.");
+        
+        if (!input.containsKey("input_hex") || !input.containsKey("actual_algorithm")) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Missing 'input_hex' or 'actual_algorithm'"));
+        }
+        
+        String inputHex = input.get("input_hex");
+        String actualAlgorithm = input.get("actual_algorithm");
+        
+        // Execute asynchronously so we don't block the HTTP request while python runs
+        new Thread(() -> {
+            mlService.saveFeedback(inputHex, actualAlgorithm);
+        }).start();
+        
+        return ResponseEntity.ok(Map.of("message", "Feedback received successfully."));
+    }
 }

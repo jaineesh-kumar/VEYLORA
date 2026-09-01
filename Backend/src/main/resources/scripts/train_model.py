@@ -54,10 +54,10 @@ def main():
     print(f"{'='*60}")
     
     clf = RandomForestClassifier(
-        n_estimators=200,
+        n_estimators=500,
         max_depth=None,
-        min_samples_split=2,
-        min_samples_leaf=1,
+        min_samples_split=4,
+        min_samples_leaf=2,
         max_features='sqrt',
         random_state=42,
         n_jobs=-1,
@@ -109,10 +109,10 @@ def main():
     print(f"{'='*60}")
     
     final_clf = RandomForestClassifier(
-        n_estimators=200,
+        n_estimators=500,
         max_depth=None,
-        min_samples_split=2,
-        min_samples_leaf=1,
+        min_samples_split=4,
+        min_samples_leaf=2,
         max_features='sqrt',
         random_state=42,
         n_jobs=-1,
